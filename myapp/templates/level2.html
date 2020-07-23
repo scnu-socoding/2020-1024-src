@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Level 2</title>
+    {% load static %}
+    <link href="{%static 'myapp/css/style.css'%}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="containerDiv">
+        <div class="titleDiv">
+            <span class="font1">Level 2</span>
+        </div>
+
+        <div class="problemDiv">
+            <span class="font2">
+                {% load static %}
+                <img src="{%static 'myapp/img/huaji.png'%}" />
+                <!-- 可以打开这个神奇的网站看看哦~ -->
+                <!-- http://www.atool9.com/steganography.php -->
+            </span>
+        </div>
+        <div class="answerDiv">
+            <form method="post" action="{% url 'compare_flag' %}">
+                {% csrf_token %}
+                <input type="text" class="input" name="flag">
+                <input type="submit" class="button" value="提交">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
+{% if messages %}
+<script>
+    {% for msg in messages %}
+    alert('{{msg.message}}')
+    {% endfor %}
+</script>
+{% endif %}

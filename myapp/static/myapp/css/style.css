@@ -1,0 +1,102 @@
+body {
+    background: url("../img/bg_img.jpg");
+    background-size: cover;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+}
+
+.containerDiv {
+    margin-top: 0;
+    margin-bottom: 0;
+    background-size: 100% 100%;
+    width: 100%;
+    text-align: center;
+}
+
+.lg_content {
+    margin-top: 100px;
+}
+
+.titleDiv {
+    width: 100%;
+    height: 150px;
+}
+
+.problemDiv {
+    width: 80%;
+    height: 360px;
+    margin-left: 10%;
+    margin-right: 10%;
+    position: relative;
+}
+
+.leftDiv {
+    width: 50%;
+    height: 360px;
+    text-align: center;
+    float: left;
+}
+
+.rightDiv {
+    width: 40%;
+    margin-left: 10%;
+    height: 360px;
+    text-align: center;
+    float: left;
+}
+
+.answerDiv {
+    width: 100%;
+    height: 60px;
+    position: relative;
+}
+
+.background {
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+}
+
+.button {
+    width: 68px;
+    height: 34px;
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(76, 129, 179);
+    box-shadow: none;
+    border: none;
+    border-style: inline;
+}
+
+.input {
+    height: 40px;
+    width: 250px;
+    font-size: 14px;
+    color: rgba(155, 152, 151, 0.774);
+    border: none;
+    box-shadow: none;
+    border-style: none;
+    border-width: 0px;
+}
+
+.font1 {
+    font-family: "Microsoft YaHei";
+    font-size: 12px;
+    font-weight: bold;
+    color: azure;
+}
+
+.font2 {
+    font-family: "Microsoft YaHei";
+    font-size: 22px;
+    width: 400px;
+    color: rgb(88, 99, 192);
+}
+
+#game_div,
+p {
+    width: 400px;
+    margin: auto;
+    margin-top: 0px;
+}

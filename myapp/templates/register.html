@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Register</title>
+    {% load static %}
+    <link href="{% static 'myapp/css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="lg_content">
+        <table cellspacing="30px" align="center">
+            <form method="post" action="{% url 'register_to_db' %}">
+                {% csrf_token %}
+                <tr>
+                    <td colspan="2">
+                        <input type="text" name="userid" class="reg_ip" placeholder="学号">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="text" name="username" class="reg_ip" placeholder="昵称">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="password" name="passwd" class="reg_ip" placeholder="密码">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="password" name="repasswd" class="reg_ip" placeholder="确认密码">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td align="left">
+
+                        <input type="submit" value="注册" style="position:relative;left:40px;" class="button">
+
+                    </td>
+                </tr>
+            </form>
+            <td align="center" style="position:relative;left:-50px">
+                <span class="font1">已经注册？</span>
+                <input type="submit" class="button" style="height:25px;width:80px;font-size:12px" value="直接登录"
+                    onclick="location.href='{% url 'login' %}'">
+            </td>
+        </table>
+    </div>
+</body>
+
+</html>
+
+{% if messages %}
+<script>
+    {% for msg in messages %}
+    alert('{{msg.message}}')
+    {% endfor %}
+</script>
+{% endif %}
