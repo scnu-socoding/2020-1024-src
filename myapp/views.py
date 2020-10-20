@@ -104,7 +104,6 @@ def compare_flag(request):
     flag = request.POST.get('flag', None)
     userid = request.session['userid']
     user = STUDB.objects.filter(userid=userid).last()
-    messages.error(request, correct_flag[user.rank])
     if user.rank < 2:
         if correct_flag[user.rank] == flag:
             user.rank += 1
@@ -121,8 +120,7 @@ def compare_flag(request):
             user.save()
             return redirect(reverse('play'))
         else:
-            messages.success(request, flag)
-            # return redirect(reverse('play')+"?code=-1")
+            return redirect(reverse('play')+"?code=-1")
     elif user.rank > 2:
         if flag == 'happy':
             user.superflag = timezone.now()
