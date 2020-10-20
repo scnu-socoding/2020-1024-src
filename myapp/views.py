@@ -7,7 +7,7 @@ import django.utils.timezone as timezone
 
 
 def index(request):
-    return HttpResponse("<h1>Hello World</h1>")
+    return HttpResponse("<h1>Hello 1204</h1>")
 
 
 def login(request):
