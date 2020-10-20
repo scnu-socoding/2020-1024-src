@@ -45,7 +45,7 @@ def register_to_db(request):
     repasswd = request.POST.get('repasswd', None)
     if not userid or not passwd or not username or not repasswd:
         return redirect(reverse('register')+"?code=-5")
-    if not re.match(r'^(201).*\d{8}$', userid):
+    if not re.match(r'^(20[1|2]).+[\d{7}|\d{8}]$', userid):
         return redirect(reverse('register')+"?code=-4")
     if not re.match(r'^[A-Za-z0-9]{6,18}$', passwd):
         return redirect(reverse('register')+"?code=-3")
