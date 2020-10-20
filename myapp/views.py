@@ -99,11 +99,12 @@ def play(request):
 def compare_flag(request):
     correct_flag = [
         '',
-        '2018',
+        '2048',
     ]
     flag = request.POST.get('flag', None)
     userid = request.session['userid']
     user = STUDB.objects.filter(userid=userid).last()
+    messages.error(request, correct_flag[user.rank])
     if user.rank < 2:
         if correct_flag[user.rank] == flag:
             user.rank += 1
@@ -120,7 +121,8 @@ def compare_flag(request):
             user.save()
             return redirect(reverse('play'))
         else:
-            return redirect(reverse('play')+"?code=-1")
+            messages.success(request, flag)
+            # return redirect(reverse('play')+"?code=-1")
     elif user.rank > 2:
         if flag == 'happy':
             user.superflag = timezone.now()
