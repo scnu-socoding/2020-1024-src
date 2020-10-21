@@ -221,9 +221,9 @@
     <canvas style="position: absolute;z-index: -4;"></canvas>
     <p style="color:white;text-align: center;">SCNU 1024 Level N</p>
     <img id="my_img" style="position: absolute;z-index: -3;" src="{% static 'myapp/img/code_img.png'%}">
-    <textarea id="my_text" disabled=true style="position: absolute;z-index: -3;"></textarea>
-    <textarea id="my_text22" oninput="text22InChange()" disabled=true
-        style="position: absolute;z-index: -2;"></textarea>
+    <textarea id="my_text" disabled=true style="position: absolute;z-index: -3;" spellcheck="false"></textarea>
+    <textarea id="my_text22" oninput="text22InChange()" disabled=true style="position: absolute;z-index: -2;"
+        spellcheck="false"></textarea>
     <textarea id="ed" oninput="edInChange()" spellcheck="false"></textarea>
     <!-- Mother fucker pls forgive me -->
     <div class="promo">
@@ -245,6 +245,7 @@
         let my_text22 = document.getElementById("my_text22");
         text22InChange = function () {
             if (my_text22.value === my_text.value) {
+                splatStack.push(100);
                 /***************************关卡通过************************************/
                 alert("YOU WIN!!!!"); /*****关卡通过************************************/
                 /***************************关卡通过************************************/
