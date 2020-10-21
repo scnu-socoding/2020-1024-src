@@ -10,29 +10,75 @@
 />
 </head>
 
-<body class="mdui-theme-primary-teal mdui-appbar-with-toolbar mdui-drawer-body-left">
+<body class="mdui-theme-primary-blue-grey mdui-appbar-with-toolbar mdui-drawer-body-left">
   <header class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
     <div class="mdui-toolbar mdui-color-theme">
       <a href="javascript:;" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target:'#main-drawer', swipe:true}"><i class="mdui-icon material-icons">menu</i></a>
-      <span class="mdui-typo-title">Level 5 - 1024点</span>
+      <span class="mdui-typo-title">Level 5  - 1024点</span>
+      <div class="mdui-toolbar-spacer"></div>
+      <a href='#' class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">refresh</i></a>
     </div>
   </header>
   <nav class="mdui-drawer" id="main-drawer">
-    <div class="mdui-list">
-      <a class="mdui-list-item mdui-ripple" herf="#">
-        <i class="mdui-list-item-icon mdui-icon material-icons">arrow_back</i>
-        <div calss="mdui-list-item-content">返回上一关</div>
+    <ul class="mdui-list" style="max-width: 360px;">
+      <a href="#">
+        <li class="mdui-list-item mdui-ripple">
+          <i class="mdui-list-item-icon mdui-icon material-icons">arrow_back</i>
+          <div class="mdui-list-item-content">跳转至上一题</div>
+        </li>
       </a>
-      <a class="mdui-list-item mdui-ripple" herf="#">
-        <i class="mdui-list-item-icon mdui-icon material-icons">arrow_forward</i>
-        <div calss="mdui-list-item-content">快进到下一关</div>
+      <a href="#">
+        <li class="mdui-list-item mdui-ripple">
+          <i class="mdui-list-item-icon mdui-icon material-icons">arrow_forward</i>
+          <div class="mdui-list-item-content">跳转至下一题</div>
+        </li>
       </a>
-    </div>
+      <a href="#">
+        <li class="mdui-list-item mdui-ripple">
+          <i class="mdui-list-item-icon mdui-icon material-icons">refresh</i>
+          <div class="mdui-list-item-content">重置游戏</div>
+        </li>
+      </a>
+    </ul>
   </nav>
 
 
   <div class="mdui-container">
-    <p>Hello World!</p>
+    <div class="mdui-row">
+      <div class="mdui-col-xs-12 mdui-col-md-7">
+        <div class="mdui-typo">
+          <h1 class="mdui-text-color-theme">欢迎</h1>
+          <p>经过一路上过关斩将，你已经来到了游戏的第 5 关。恭喜你！</br>
+            与先前的阴间题目不同的是，想要通过本关非常简单——你不需要过硬的技术，只需要非常的运气。</p>
+          <h1 class="mdui-text-color-theme">你要做</h1>   
+          <p>看到下面的进度指示器和按钮了吗？每个按钮都代表着一个随机数，你需要通过点击按钮，令我们的进度指示器<strong>归满</strong>；</p>
+          <h1 class="mdui-text-color-theme">注意</h1> 
+          <p>必须正好归满，否则游戏瞬间爆炸。</br>
+            看到跳关按钮了吗？如果实在太非，就点一点它吧。</p>
+          <div class="mdui-divider-inset"></div></br>
+          <p>规则了解清楚了吗？那么，让我们开始吧！</p>
+        </div>
+      </div>
+      <div class="mdui-col-xs-12 mdui-col-md-5">
+        <div class="mdui-card mdui-m-y-5">
+          <div class="mdui-card-header">
+            <div class="mdui-card-header-title">指示器</div>
+            <div class="mdui-card-header-subtitle">你需要达到的值为 1024</div>
+          </div>
+          <div class="mdui-card-content">
+            <div class="mdui-progress">
+              <div id="progress" class="mdui-progress-determinate" style="width: 30%;"></div>
+            </div>
+          </div>
+          <div class="mdui-card-actions">
+            <button class="mdui-btn mdui-ripple" id="btn1">+0</button>
+            <button class="mdui-btn mdui-ripple" id="btn2">+0</button>
+            <button class="mdui-btn mdui-ripple" id="btn3">+0</button>
+            <button class="mdui-btn mdui-ripple" id="btn4">+0</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <footer></footer>
