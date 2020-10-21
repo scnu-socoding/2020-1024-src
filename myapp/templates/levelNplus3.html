@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        name="viewport">
+    <title>SCNU 1024 Level N+3</title>
+    <style type="text/css">
+        @font-face {
+            font-family: MathFont;
+            font-weight: 700;
+            src: url(https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/fonts/KaTeX_Main-Regular.woff2);
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        #father #gc {
+            border: solid;
+            position: absolute;
+            z-index: 2;
+        }
+
+        #father #gc2 {
+            border: solid;
+            position: absolute;
+            z-index: 1;
+        }
+
+        #father #gc3 {
+            position: absolute;
+            z-index: 3;
+        }
+
+        @media(min-width:700px) {
+            button {
+                height: 1.8em;
+                width: 2.4em;
+                padding: 0;
+                margin: 0;
+                font-family: Consolas;
+                font-size: 20px;
+                margin-left: -6px;
+                margin-top: -1px;
+            }
+
+            #father {
+                position: fixed;
+                top: 50%;
+                transform: translateY(-50%)
+            }
+
+            #ed {
+                font-size: 22px;
+                width: 80%;
+                resize: vertical;
+                font-family: MathFont, Georgia, serif;
+            }
+
+            #ed2 {
+                font-size: 18px;
+                font-weight: bold;
+                width: 80%;
+                resize: vertical;
+            }
+
+            .container {
+                display: flex;
+            }
+
+            .right {
+                width: 30%;
+                margin-left: 20px;
+            }
+
+            .out {
+                flex: 1;
+                width: 16%;
+            }
+
+            #fpsm {
+                position: fixed;
+                bottom: 0px;
+                right: 20px;
+            }
+        }
+
+        @media(max-width:700px) {
+            button {
+                height: 1.4em;
+                width: 1.8em;
+                padding: 0;
+                margin: 0;
+                font-family: Consolas;
+                font-size: 20px;
+                margin-left: -6px;
+                margin-top: -1px;
+            }
+
+            #ed {
+                font-size: 20px;
+                width: 95%;
+                resize: vertical;
+                font-family: MathFont, Georgia, serif;
+            }
+
+            #ed2 {
+                font-size: 14px;
+                font-weight: bold;
+                width: 95%;
+                resize: vertical;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="left" id="lft">
+            <div id="father">
+                <canvas id="gc"></canvas>
+                <canvas id="gc2"></canvas>
+                <canvas id="gc3"></canvas>
+            </div>
+        </div>
+        <div class="right">
+            <div style="width: 100%;">
+
+                <textarea id="ed2" oninput="inChange2()" style="visibility:hidden;">
+fps /*帧率*/= 60;
+color /*颜色*/= ["blue","red","green"];
+p_b /*点精度*/= 100;
+ps /*点大小*/= 1;
+p_n /*线精度*/= 1;
+ls /*线粗细*/= 1;
+def /*定义*/= {love: 520, you: 1314/520};</textarea>
+
+                <summary style="font-size:24px;font-weight:bold;">表达式</summary>
+                <br>
+                <textarea id="ed" oninput="inChange()">
+abs(x)>0.9 or abs(y)>0.9
+Circle(k,[0.7,0.7],0.1)</textarea>
+                </details>
+                <div class="out">
+                    <h3 id="outm" style="word-wrap:break-word;font-family: Consolas; visibility:hidden;"></h3>
+                </div>
+            </div>
+            <h3 id="fpsm"></h3>
+</body>
+{% load static %}
+<script src="{% static 'myapp/js/math.min.js'%}"></script>
+<script src="{% static 'myapp/js/plotscript.js'%}"></script>
+
+</html>

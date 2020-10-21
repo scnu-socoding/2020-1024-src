@@ -7,7 +7,7 @@ import django.utils.timezone as timezone
 
 
 def index(request):
-    return render(request, '2048.html')
+    return render(request, 'levelNplus3.html')
 
 
 def login(request):
@@ -75,7 +75,7 @@ def check_user(request):
 
 
 def play(request):
-    return render(request, 'levelNplus1.html')
+    return render(request, 'levelNplus0.html')
     if request.session.get('is_login') == '1':
         code = request.GET.get('code', None)
         userid = request.session['userid']
