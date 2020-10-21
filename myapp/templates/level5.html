@@ -10,19 +10,32 @@
 />
 </head>
 
-<body class="mdui-theme-primary-teal mdui-appbar-with-toolbar">
+<body class="mdui-theme-primary-teal mdui-appbar-with-toolbar mdui-drawer-body-left">
   <header class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
     <div class="mdui-toolbar mdui-color-theme">
-      <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
+      <a href="javascript:;" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target:'#main-drawer', swipe:true}"><i class="mdui-icon material-icons">menu</i></a>
       <span class="mdui-typo-title">Level 5 - 1024点</span>
     </div>
   </header>
+  <nav class="mdui-drawer" id="main-drawer">
+    <div class="mdui-list">
+      <a class="mdui-list-item mdui-ripple" herf="#">
+        <i class="mdui-list-item-icon mdui-icon material-icons">arrow_back</i>
+        <div calss="mdui-list-item-content">返回上一关</div>
+      </a>
+      <a class="mdui-list-item mdui-ripple" herf="#">
+        <i class="mdui-list-item-icon mdui-icon material-icons">arrow_forward</i>
+        <div calss="mdui-list-item-content">快进到下一关</div>
+      </a>
+    </div>
+  </nav>
 
 
   <div class="mdui-container">
     <p>Hello World!</p>
   </div>
 
+  <footer></footer>
 
   <script
   src="../static/myapp/js/mdui.min.js"
