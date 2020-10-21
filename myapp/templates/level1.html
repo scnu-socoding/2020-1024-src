@@ -43,12 +43,8 @@
 </html>
 {% if messages %}
 <script>
-    {
-        %
-        for msg in messages %
-    }
-    alert('{{msg.message}}') {
-        % endfor %
-    }
+    {% for msg in messages %}
+         alert('{{msg.message}}')
+    {% endfor %}
 </script>
 {% endif %}
