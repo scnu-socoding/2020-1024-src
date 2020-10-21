@@ -159,7 +159,7 @@
             font-size: 24px;
             font-weight: bold;
             width: 50%;
-            height: 50%;
+            height: 40%;
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -170,18 +170,40 @@
             border-style: none;
             user-select: none;
             font-family: "JetBrains Mono Medium", "Consolas", "Menlo", "Monaco", monospace, serif;
+            border: none;
+            outline: none;
         }
 
         #my_text {
             font-size: 24px;
             font-weight: bold;
-            top: 20px;
-            left: 20px;
+            margin: 6%;
+            width: 60%;
+            height: 60%;
             color: #fff;
             text-shadow: #ff00c8;
             user-select: none;
+            resize: none;
+            background: transparent;
             font-family: "JetBrains Mono Medium", "Consolas", "Menlo", "Monaco", monospace, serif;
+            border: none;
+            outline: none;
+        }
 
+        #my_text22 {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 6%;
+            width: 60%;
+            height: 60%;
+            color: rgb(0, 255, 13);
+            text-shadow: #ff00c8;
+            user-select: none;
+            resize: none;
+            background: transparent;
+            font-family: "JetBrains Mono Medium", "Consolas", "Menlo", "Monaco", monospace, serif;
+            border: none;
+            outline: none;
         }
     </style>
     <script>
@@ -196,10 +218,12 @@
 
 <body ondragstart="return false" oncontextmenu="return false" ondragstart="return false" onselect="return false"
     onselect="document.selection.empty()" onpaste="return false" oncopy="return false" oncut="return false">
-    <canvas style="position: absolute;z-index: -2;"></canvas>
+    <canvas style="position: absolute;z-index: -4;"></canvas>
     <p style="color:white;text-align: center;">SCNU 1024 Level N</p>
-    <img id="my_img" style="position: absolute;z-index: -1;" src="{% static 'myapp/img/code_img.png'%}">
-    <p id="my_text"></p>
+    <img id="my_img" style="position: absolute;z-index: -3;" src="{% static 'myapp/img/code_img.png'%}">
+    <textarea id="my_text" disabled=true style="position: absolute;z-index: -3;"></textarea>
+    <textarea id="my_text22" oninput="text22InChange()" disabled=true
+        style="position: absolute;z-index: -2;"></textarea>
     <textarea id="ed" oninput="edInChange()" spellcheck="false"></textarea>
     <!-- Mother fucker pls forgive me -->
     <div class="promo">
@@ -218,32 +242,34 @@
         let ined = document.getElementById("ed");
         let my_img = document.getElementById("my_img");
         let my_text = document.getElementById("my_text");
+        let my_text22 = document.getElementById("my_text22");
+        text22InChange = function () {
+            if (my_text22.value === my_text.value) {
+                /***************************关卡通过************************************/
+                alert("YOU WIN!!!!"); /*****关卡通过************************************/
+                /***************************关卡通过************************************/
+            }
+        }
         edInChange = function () {
             splatStack.push(1);
-            if (my_img.style.display != "none") {
-                if (ined.value === `#include <stdio.h>
+            if (ined.value === `#include <stdio.h>
 
 int main(void)
 {
     printf("Hello, World!");
     return 0;
 }`) {
-                    ined.value = "";
-                    splatStack.push(50);
-                    my_img.style.display = "none";
-                    let str = '';
-                    let n = 20 + Math.round(Math.random() * 30);
-                    for (let i = 0; i < n; i++) {
-                        str += "Hello SCNU."
-                    }
-                    my_text.innerHTML = str;
+                ined.value = "";
+                ined.setAttribute('disabled', 'disabled');
+                my_text22.removeAttribute('disabled');
+                splatStack.push(50);
+                my_img.style.display = "none";
+                let str = '';
+                let n = 20 + Math.round(Math.random() * 30);
+                for (let i = 0; i < n; i++) {
+                    str += "Hello SCNU."
                 }
-            } else {
-                if (ined.value === my_text.innerHTML) {
-                    /***************************关卡通过************************************/
-                    alert("WIN"); /*************关卡通过************************************/
-                    /***************************关卡通过************************************/
-                }
+                my_text.innerHTML = str;
             }
         }
     </script>
