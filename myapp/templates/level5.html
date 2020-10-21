@@ -1,6 +1,10 @@
 <!doctype html>
+<<<<<<< HEAD
 <html>
 
+=======
+<html lang="zh-cn">
+>>>>>>> f5a431227dd71a1bcb54a3e0b0d4a0e651979b38
 <head>
   <meta charset="utf-8">
   <title>Level 5 - SCNU-SoCoding 2020-1024</title>
@@ -15,7 +19,7 @@
         mdui-drawer="{target:'#main-drawer', swipe:true}"><i class="mdui-icon material-icons">menu</i></a>
       <span class="mdui-typo-title">Level 5 - 1024点</span>
       <div class="mdui-toolbar-spacer"></div>
-      <a href='#' class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">refresh</i></a>
+      <a href='#' class="mdui-btn mdui-btn-icon" onclick="location.reload()"><i class="mdui-icon material-icons">refresh</i></a>
     </div>
   </header>
   <nav class="mdui-drawer" id="main-drawer">
@@ -33,7 +37,7 @@
         </li>
       </a>
       <a href="#">
-        <li class="mdui-list-item mdui-ripple">
+        <li class="mdui-list-item mdui-ripple" onclick="location.reload()">
           <i class="mdui-list-item-icon mdui-icon material-icons">refresh</i>
           <div class="mdui-list-item-content">重置游戏</div>
         </li>
@@ -51,9 +55,18 @@
             与先前的阴间题目不同的是，想要通过本关非常简单——你不需要过硬的技术，只需要非常的运气。</p>
           <h1 class="mdui-text-color-theme">你要做</h1>
           <p>看到下面的进度指示器和按钮了吗？每个按钮都代表着一个随机数，你需要通过点击按钮，令我们的进度指示器<strong>归满</strong>；</p>
+<<<<<<< HEAD
           <h1 class="mdui-text-color-theme">注意</h1>
           <p>必须正好归满，否则游戏瞬间爆炸。</br>
             看到跳关按钮了吗？如果实在太非，就点一点它吧。</p>
+=======
+          <h1 class="mdui-text-color-theme">注意</h1> 
+          <p>点击按钮后，进度条增加相应数值，该按钮对应数值随机刷新，其余按钮数值保持不变。</br>
+            必须正好归满，否则游戏瞬间爆炸。</br>
+            游戏本身允许无限次重试。</br>
+            觉得自己太非这游戏没法玩？那也没有办法，你以为游戏开发者会留后门吗？
+          </p>
+>>>>>>> f5a431227dd71a1bcb54a3e0b0d4a0e651979b38
           <div class="mdui-divider-inset"></div></br>
           <p>规则了解清楚了吗？那么，让我们开始吧！</p>
         </div>
@@ -62,27 +75,95 @@
         <div class="mdui-card mdui-m-y-5">
           <div class="mdui-card-header">
             <div class="mdui-card-header-title">指示器</div>
-            <div class="mdui-card-header-subtitle">你需要达到的值为 1024</div>
+            <div id="sum" class="mdui-card-header-subtitle">你需要达到的值为 1024 ,当前值为 0 </div>
           </div>
           <div class="mdui-card-content">
             <div class="mdui-progress">
-              <div id="progress" class="mdui-progress-determinate" style="width: 30%;"></div>
+              <div id="progress" class="mdui-progress-determinate" style="width: 0%;"></div>
             </div>
           </div>
           <div class="mdui-card-actions">
-            <button class="mdui-btn mdui-ripple" id="btn1">+0</button>
-            <button class="mdui-btn mdui-ripple" id="btn2">+0</button>
-            <button class="mdui-btn mdui-ripple" id="btn3">+0</button>
-            <button class="mdui-btn mdui-ripple" id="btn4">+0</button>
+            <button class="mdui-btn mdui-ripple" id="btn1" onclick="clickBtn1()">+0</button>
+            <button class="mdui-btn mdui-ripple" id="btn2" onclick="clickBtn2()">+0</button>
+            <button class="mdui-btn mdui-ripple" id="btn3" onclick="clickBtn3()">+0</button>
+            <button class="mdui-btn mdui-ripple" id="btn4" onclick="clickBtn4()">+0</button>
           </div>
         </div>
+        <div id="finsihed"></div>
       </div>
     </div>
   </div>
 
   <footer></footer>
 
+<<<<<<< HEAD
   <script src="../static/myapp/js/mdui.min.js"></script>
+=======
+  <script>
+    var isFinished = false;
+    var sum = 0;
+    var btn1 = rand();
+    var btn2 = rand();
+    var btn3 = rand();
+    var btn4 = rand();
+    document.getElementById("btn1").innerHTML = "+"+btn1;
+    document.getElementById("btn2").innerHTML = "+"+btn2;
+    document.getElementById("btn3").innerHTML = "+"+btn3;
+    document.getElementById("btn4").innerHTML = "+"+btn4;
+  
+    document.getElementById("progress").style="width: 0%;";
+  
+    function rand()
+    {
+      return Math.round(Math.random() * 100);
+    }
+  
+    function clickBtn1()
+    {
+      sum += btn1;
+      var next = rand();
+      var percentage = Math.floor((sum/1024)*100);
+      document.getElementById("btn1").innerHTML = "+" + next;
+      document.getElementById("sum").innerHTML = "你需要达到的值为 1024 ,当前值为 "+ sum;
+      document.getElementById("progress").style="width: "+percentage+"%;";
+      btn1 = next;
+    }
+    function clickBtn2()
+    {
+      sum += btn2;
+      var next = rand();
+      var percentage = Math.floor((sum/1024)*100);
+      document.getElementById("btn2").innerHTML = "+"+next;
+      document.getElementById("sum").innerHTML = "你需要达到的值为 1024 ,当前值为 "+ sum;
+      document.getElementById("progress").style="width: "+percentage+"%;";
+      btn2 = next;
+    }
+    function clickBtn3()
+    {
+      sum += btn3;
+      var next = rand();
+      var percentage = Math.floor((sum/1024)*100);
+      document.getElementById("btn3").innerHTML = "+"+next;
+      document.getElementById("sum").innerHTML = "你需要达到的值为 1024 ,当前值为 "+ sum;
+      document.getElementById("progress").style="width: "+percentage+"%;";
+      btn3 = next;
+    }
+    function clickBtn4()
+    {
+      sum += btn4;
+      var next = rand();
+      var percentage = Math.floor((sum/1024)*100);
+      document.getElementById("btn4").innerHTML = "+"+next;
+      document.getElementById("sum").innerHTML = "你需要达到的值为 1024 ,当前值为 "+ sum;
+      document.getElementById("progress").style="width: "+percentage+"%;";
+      btn4 = next;
+    }
+  </script>
+
+  <script
+  src="../static/myapp/js/mdui.min.js"
+></script>
+>>>>>>> f5a431227dd71a1bcb54a3e0b0d4a0e651979b38
 </body>
 
 </html>
