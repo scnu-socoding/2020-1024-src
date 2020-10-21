@@ -62,10 +62,10 @@ body {
     width: 68px;
     height: 34px;
     font-size: 18px;
-    color: rgb(255, 255, 255);
-    background-color: rgb(76, 129, 179);
+    color: rgb(255, 0, 0);
+    background-color: rgb(255, 0, 191);
     box-shadow: none;
-    border: none;
+    border: dashed;
     border-style: inline;
 }
 

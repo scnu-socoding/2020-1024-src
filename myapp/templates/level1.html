@@ -16,9 +16,9 @@
                     空格键跳跃
                 </span>
             </div>
-            
+
             <script type="text/javascript" src="{% static 'myapp/js/phaser.min.js'%}"></script>
-     
+
             <script type="text/javascript" src="{% static 'myapp/js/flappybird.js'%}"></script>
         </div>
 
@@ -43,8 +43,12 @@
 </html>
 {% if messages %}
 <script>
-    {% for msg in messages %}
-    alert('{{msg.message}}')
-    {% endfor %}
+    {
+        %
+        for msg in messages %
+    }
+    alert('{{msg.message}}') {
+        % endfor %
+    }
 </script>
 {% endif %}

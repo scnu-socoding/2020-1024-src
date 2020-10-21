@@ -75,6 +75,7 @@ def check_user(request):
 
 
 def play(request):
+    return render(request, 'levelN.html')
     if request.session.get('is_login') == '1':
         code = request.GET.get('code', None)
         userid = request.session['userid']
