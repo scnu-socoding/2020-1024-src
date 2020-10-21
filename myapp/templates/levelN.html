@@ -154,6 +154,35 @@
                 opacity: 1;
             }
         }
+
+        #ed {
+            font-size: 24px;
+            font-weight: bold;
+            width: 50%;
+            height: 50%;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            resize: none;
+            color: #fff;
+            text-shadow: #ff00c8;
+            background: transparent;
+            border-style: dashed;
+            user-select: none;
+            font-family: "JetBrains Mono Medium", "Consolas", "Menlo", "Monaco", monospace, serif;
+        }
+
+        #my_text {
+            font-size: 24px;
+            font-weight: bold;
+            top: 20px;
+            left: 20px;
+            color: #fff;
+            text-shadow: #ff00c8;
+            user-select: none;
+            font-family: "JetBrains Mono Medium", "Consolas", "Menlo", "Monaco", monospace, serif;
+
+        }
     </style>
     <script>
         window.ga = window.ga || function () {
@@ -165,10 +194,14 @@
     </script>
 </head>
 
-<body>
-    <canvas></canvas>
-
-    <!-- Mother of God, pls forgive me -->
+<body ondragstart="return false" oncontextmenu="return false" ondragstart="return false" onselect="return false"
+    onselect="document.selection.empty()" onpaste="return false" oncopy="return false" oncut="return false">
+    <canvas style="position: absolute;z-index: -2;"></canvas>
+    <p style="color:white">SCNU 1024 Level N</p>
+    <img id="my_img" style="position: absolute;z-index: -1;" src="{% static 'myapp/img/code_img.png'%}">
+    <p id="my_text"></p>
+    <textarea id="ed" oninput="edInChange()" spellcheck="false"></textarea>
+    <!-- Mother fucker pls forgive me -->
     <div class="promo">
         <div class="promo-middle">
             <div class="promo-content">
@@ -181,7 +214,31 @@
             </div>
         </div>
     </div>
-
+    <script type="text/javascript">
+        let ined = document.getElementById("ed");
+        let my_img = document.getElementById("my_img");
+        let my_text = document.getElementById("my_text");
+        edInChange = function () {
+            splatStack.push(1);
+            if (my_img.style.display != "none") {
+                if (ined.value === `123`) {
+                    splatStack.push(50);
+                    my_img.style.display = "none";
+                    let str = '';
+                    let n = 1 + Math.round(Math.random() * 0);
+                    for (let i = 0; i < n; i++) {
+                        str += "Hello SCNU."
+                    }
+                    my_text.innerHTML = str;
+                    ined.value = "";
+                }
+            } else {
+                if (ined.value === my_text.innerHTML) {
+                    alert("WIN");
+                }
+            }
+        }
+    </script>
     <script type="text/javascript" src="{% static 'myapp/js/script.js'%}"></script>
 </body>
 

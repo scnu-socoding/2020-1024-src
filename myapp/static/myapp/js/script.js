@@ -1457,7 +1457,7 @@ function correctRadius(radius) {
     return radius;
 }
 
-canvas.addEventListener('mousedown', e => {
+window.addEventListener('mousedown', e => {
     let posX = scaleByPixelRatio(e.offsetX);
     let posY = scaleByPixelRatio(e.offsetY);
     let pointer = pointers.find(p => p.id == -1);
@@ -1466,7 +1466,7 @@ canvas.addEventListener('mousedown', e => {
     updatePointerDownData(pointer, -1, posX, posY);
 });
 
-canvas.addEventListener('mousemove', e => {
+window.addEventListener('mousemove', e => {
     let pointer = pointers[0];
     if (!pointer.down) return;
     let posX = scaleByPixelRatio(e.offsetX);
@@ -1478,7 +1478,7 @@ window.addEventListener('mouseup', () => {
     updatePointerUpData(pointers[0]);
 });
 
-canvas.addEventListener('touchstart', e => {
+window.addEventListener('touchstart', e => {
     e.preventDefault();
     const touches = e.targetTouches;
     while (touches.length >= pointers.length)
@@ -1490,7 +1490,7 @@ canvas.addEventListener('touchstart', e => {
     }
 });
 
-canvas.addEventListener('touchmove', e => {
+window.addEventListener('touchmove', e => {
     e.preventDefault();
     const touches = e.targetTouches;
     for (let i = 0; i < touches.length; i++) {
@@ -1512,10 +1512,7 @@ window.addEventListener('touchend', e => {
 });
 
 window.addEventListener('keydown', e => {
-    if (e.code === 'KeyP')
-        config.PAUSED = !config.PAUSED;
-    if (e.key === ' ')
-        splatStack.push(parseInt(Math.random() * 20) + 5);
+    e.stopPropagation();
 });
 
 function updatePointerDownData(pointer, id, posX, posY) {
