@@ -287,9 +287,24 @@
     <script type="text/javascript" src="{% static 'myapp/js/music.js'%}"></script>
     <script type="text/javascript">
         let music = new MusicBox('.music-box');
+        let arr_ans = [0, 0, 1, 2, 3];
+        let sign = 0;
         window.addEventListener("keydown", function (e) {
             let i = (e.keyCode - 48) % music.arrFrequency.length;
-            splatStack.push((music.arrFrequency.length - i) / 10);
+            if (i == arr_ans[sign]) {
+                sign++;
+                console.log(sign);
+                if (sign >= arr_ans.length) {
+                    /***************************关卡通过************************************/
+                    alert("YOU WIN!!!!"); /*****关卡通过************************************/
+                    /***************************关卡通过************************************/
+
+                }
+                splatStack.push(20);
+            } else {
+                splatStack.push((music.arrFrequency.length - i) / 10);
+                sign = 0;
+            }
             music.createSound(music.arrFrequency[i]);
         })
     </script>
