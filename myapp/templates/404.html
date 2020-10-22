@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            margin:0px;
+            padding:0px;
+            background: url({% static 'myapp/img/8.jpg' %}) no-repeat 0px 0px;
+            background-size: 100%;
+        }
+        .container{
+            margin:0 auto;
+            width:1000px;
+            z-index:1;
+        }
+        .container:after{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255,255,255,0.6);
+            z-index: -1;
+        }
+        .title{
+            margin-top: 70px;
+        }
+        h1{
+            text-align:center;
+            margin:0px;
+            color: #4C4C4C;
+            font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
+            font-size: 200px;
+        }
+        h2{
+            margin: 50px;
+            font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
+            color: grey;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">
+            <h1>404</h1>
+            <h1 style="font-size: 100px">NOT FOUND</h1>
+        </div>
+        <h2>How should we pass this game?</h2>
+    </div>
+    <div style="display: none">
+        <div>
+            <div>
+                <p>你发现了不得了的东西</p>
+                <!-- 要不尝试改下url? -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>
