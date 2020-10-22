@@ -199,7 +199,7 @@ const fpss = 10000;
 const dt = 0.02;
 const pl = 10;
 const pld2 = pl / 2;
-const mu = 1;
+const mu = 0.9;
 ballcolor = "red"
 pa = [0, 0];
 pv = [0, 0];
@@ -609,7 +609,7 @@ function refresh(isD = false) {
         ctx.fillStyle = "rgb(255,0,255)";
         ctx.textAlign = "left";
         ctx.textBaseline = "bottom";
-        ctx.fillText("SCNU1024", ctransX(0.5), ctransY(0.2));
+        ctx.fillText("SCNU1024", ctransX(0.4), ctransY(0.2));
     }
     changefm(Math.round(1000 / (time - ltime)) + " fps");
     ltime = time;

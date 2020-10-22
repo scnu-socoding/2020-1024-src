@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+{% load static %}
 
 <head>
     <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
@@ -9,7 +10,7 @@
         @font-face {
             font-family: MathFont;
             font-weight: 700;
-            src: url(https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/fonts/KaTeX_Main-Regular.woff2);
+            src: url({% static 'myapp/fonts/KaTeX_Main-Regular.woff2' %});
         }
 
         ::-webkit-scrollbar {

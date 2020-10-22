@@ -236,6 +236,7 @@
         let my_text = document.getElementById("my_text");
         let my_text22 = document.getElementById("my_text22");
         text22InChange = function () {
+            splatStack.push(1);
             if (my_text22.value === my_text.value) {
                 /***************************关卡通过************************************/
                 splatStack.push(50); /*****关卡通过************************************/

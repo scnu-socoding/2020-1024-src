@@ -285,6 +285,7 @@
         </div>
     </div>
     <script type="text/javascript" src="{% static 'myapp/js/music.js'%}"></script>
+    <script type="text/javascript" src="{% static 'myapp/js/script.js'%}"></script>
     <script type="text/javascript">
         let music = new MusicBox('.music-box');
         let arr_ans = [1, 1, 5, 5, 6, 6, 5, 4, 4, 3, 3, 2, 2, 1];
@@ -301,13 +302,13 @@
                 }
                 splatStack.push(20);
             } else {
+                config.SPLAT_RADIUS = (music.arrFrequency.length - i) / 200;
                 splatStack.push((music.arrFrequency.length - i) / 10);
                 sign = 0;
             }
             music.createSound(music.arrFrequency[i]);
         })
     </script>
-    <script type="text/javascript" src="{% static 'myapp/js/script.js'%}"></script>
 </body>
 
 </html>

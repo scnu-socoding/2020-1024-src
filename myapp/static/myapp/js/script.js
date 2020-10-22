@@ -57,7 +57,7 @@ let config = {
     SPLAT_FORCE: 6000,
     SHADING: true,
     COLORFUL: true,
-    COLOR_UPDATE_SPEED: 10,
+    COLOR_UPDATE_SPEED: 1,
     PAUSED: false,
     BACK_COLOR: {
         r: 0,
@@ -108,7 +108,7 @@ if (!ext.supportLinearFiltering) {
     config.SUNRAYS = false;
 }
 
-startGUI();
+//打开控制台 startGUI();
 
 function getWebGLContext(canvas) {
     const params = {
