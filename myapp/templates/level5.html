@@ -10,7 +10,7 @@
 />
 </head>
 
-<body class="mdui-theme-primary-blue-grey mdui-appbar-with-toolbar mdui-drawer-body-left">
+<body class="mdui-theme-primary-blue-grey mdui-theme-accent-orange mdui-appbar-with-toolbar mdui-drawer-body-left">
   <header class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
     <div class="mdui-toolbar mdui-color-theme">
       <a href="javascript:;" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target:'#main-drawer', swipe:true}"><i class="mdui-icon material-icons">menu</i></a>
@@ -21,14 +21,15 @@
   </header>
   <nav class="mdui-drawer" id="main-drawer">
     <ul class="mdui-list" style="max-width: 360px;">
+      <!--接下来这里填写上一关的url-->
       <a href="/myapp/templates/level4.html">
         <li class="mdui-list-item mdui-ripple">
           <i class="mdui-list-item-icon mdui-icon material-icons">arrow_back</i>
           <div class="mdui-list-item-content">跳转至上一题</div>
         </li>
       </a>
-      <a href="/myapp/templates/level6.html">
-        <li class="mdui-list-item mdui-ripple">
+      <a href="#">
+        <li class="mdui-list-item mdui-ripple" onclick="mduiSnackBar('不是说了没有后门吗，老老实实通关才是正道')">
           <i class="mdui-list-item-icon mdui-icon material-icons">arrow_forward</i>
           <div class="mdui-list-item-content">跳转至下一题</div>
         </li>
@@ -53,18 +54,19 @@
           <h1 class="mdui-text-color-theme">你要做</h1>   
           <p>看到下面的进度指示器和按钮了吗？每个按钮都代表着一个随机数，你需要通过点击按钮，令我们的进度指示器<strong>归满</strong>；</p>
           <h1 class="mdui-text-color-theme">注意</h1> 
-          <p>点击按钮后，进度条增加相应数值，该按钮对应数值随机刷新，其余按钮数值保持不变。</br>
-            必须正好归满，否则游戏瞬间爆炸。</br>
-            游戏本身允许无限次重试。</br>
+          <p>点击按钮后，进度条增加相应数值，该按钮对应数值<strong>随机</strong>刷新，其余按钮数值保持不变。</br>
+            必须<strong>正好归满</strong>，否则游戏瞬间爆炸。</br>
+            游戏本身允许<u>无限次</u>重试。</br>
             觉得自己太非这游戏没法玩？那也没有办法，你以为游戏开发者会留后门吗？
           </p>
-          <div class="mdui-divider-inset"></div></br>
+          <div class="mdui-divider-dark"></div></br>
           <p>规则了解清楚了吗？那么，让我们开始吧！</p>
         </div>
       </div>
       <div class="mdui-col-xs-12 mdui-col-md-5">
         <div class="mdui-card mdui-m-y-5">
           <div class="mdui-card-header">
+            <div class="mdui-card-header-avatar mdui-valign mdui-m-l-1"><i class="mdui-icon material-icons">tv</i></div>
             <div class="mdui-card-header-title">指示器</div>
             <div id="sum" class="mdui-card-header-subtitle">你需要达到的值为 1024 ,当前值为 0 </div>
           </div>
@@ -80,7 +82,38 @@
             <button class="mdui-btn mdui-ripple" id="btn4" onclick="clickBtn4()">+0</button>
           </div>
         </div>
-        <div id="finsihed"></div>
+        <div id="console" class="mdui-card mdui-m-y-5" style="display: none;">
+          <div class="mdui-card mdui-m-y-5">
+            <div class="mdui-card-header">
+              <div class="mdui-card-header-avatar mdui-valign mdui-m-l-1"><i class="mdui-icon material-icons">bug_report</i></div>
+              <div class="mdui-card-header-title">控制台</div>
+              <div class="mdui-card-header-subtitle">你似乎打开了什么不应存在的东西</div>
+            </div>
+            <div class="mdui-card-content">
+              <form method="post">
+                <div class="mdui-textfield mdui-textfield-floating-label">
+                  <label class="mdui-textfield-label">Btn1</label>
+                  <input type="text" id="btn1text" class="mdui-textfield-input">
+                </div>
+                <div class="mdui-textfield mdui-textfield-floating-label">
+                  <label class="mdui-textfield-label">Btn2</label>
+                  <input type="text" id="btn2text" class="mdui-textfield-input">
+                </div>
+                <div class="mdui-textfield mdui-textfield-floating-label">
+                  <label class="mdui-textfield-label">Btn3</label>
+                  <input type="text" id="btn3text" class="mdui-textfield-input">
+                </div>
+                <div class="mdui-textfield mdui-textfield-floating-label">
+                  <label class="mdui-textfield-label">Btn4</label>
+                  <input type="text" id="btn4text" class="mdui-textfield-input">
+                </div>
+              </form>
+            </div>
+            <div class="mdui-card-actions">
+              <button class="mdui-btn mdui-ripple" onclick="getInput()">Submit</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -100,14 +133,51 @@
   
     document.getElementById("progress").style="width: 0%;";
 
+    //这里写下一关的url
+    var accepted = "<a href=\"#\"><button class=\"mdui-btn mdui-ripple mdui-color-green\"><span class=\"mdui-text-color-white-text\">Accepted</span></button></a>"
+
+    var btn1c = 0;
+    var btn2c = 0;
+    var btn3c = 0;
+    var btn4c = 0;
+
+    function checkConsole()
+    {
+      if(btn1c == 1&&btn2c == 0&&btn3c == 2&&btn4c == 4)
+      {
+        document.getElementById("console").style="display: inline;";
+      }
+    }
+
+    function mduiSnackBar(message)
+    {
+      mdui.snackbar({
+        message: message
+      });
+    }
   
     function rand()
     {
       return Math.round(Math.random() * 100);
     }
+
+    
+    function getInput()
+    {
+        btn1 = Number(document.getElementById("btn1text").value);
+        btn2 = Number(document.getElementById("btn2text").value);
+        btn3 = Number(document.getElementById("btn3text").value);
+        btn4 = Number(document.getElementById("btn4text").value);
+        document.getElementById("btn1").innerHTML = "+"+btn1;
+        document.getElementById("btn2").innerHTML = "+"+btn2;
+        document.getElementById("btn3").innerHTML = "+"+btn3;
+        document.getElementById("btn4").innerHTML = "+"+btn4;
+    }
   
     function clickBtn1()
     {
+      btn1c += 1;
+      checkConsole();
       sum += btn1;
       var next = rand();
       var percentage = Math.floor((sum/1024)*100);
@@ -119,7 +189,7 @@
       }
       else if(sum == 1024)
       {
-        document.getElementById("btns").innerHTML="<a href=\"#\"><button class=\"mdui-btn mdui-ripple mdui-color-green\"><span class=\"mdui-text-color-white-text\">Answer Accepted</span></button></a>";
+        document.getElementById("btns").innerHTML=accepted;
       }
       else
       {
@@ -129,6 +199,8 @@
     }
     function clickBtn2()
     {
+      btn2c += 1;
+      checkConsole();
       sum += btn2;
       var next = rand();
       var percentage = Math.floor((sum/1024)*100);
@@ -140,7 +212,7 @@
       }
       else if(sum == 1024)
       {
-        document.getElementById("btns").innerHTML="<a href=\"#\"><button class=\"mdui-btn mdui-ripple mdui-color-green\"><span class=\"mdui-text-color-white-text\">Answer Accepted</span></button></a>";
+        document.getElementById("btns").innerHTML=accepted;
       }
       else
       {
@@ -150,6 +222,8 @@
     }
     function clickBtn3()
     {
+      btn3c += 1;
+      checkConsole();
       sum += btn3;
       var next = rand();
       var percentage = Math.floor((sum/1024)*100);
@@ -161,7 +235,7 @@
       }
       else if(sum == 1024)
       {
-        document.getElementById("btns").innerHTML="<a href=\"#\"><button class=\"mdui-btn mdui-ripple mdui-color-green\"><span class=\"mdui-text-color-white-text\">Answer Accepted</span></button></a>";
+        document.getElementById("btns").innerHTML=accepted;
       }
       else
       {
@@ -171,6 +245,8 @@
     }
     function clickBtn4()
     {
+      btn4c += 1;
+      checkConsole();
       sum += btn4;
       var next = rand();
       var percentage = Math.floor((sum/1024)*100);
@@ -182,7 +258,7 @@
       }
       else if(sum == 1024)
       {
-        document.getElementById("btns").innerHTML="<a href=\"#\"><button class=\"mdui-btn mdui-ripple mdui-color-green\"><span class=\"mdui-text-color-white-text\">Answer Accepted</span></button></a>";
+        document.getElementById("btns").innerHTML=accepted;
       }
       else
       {
