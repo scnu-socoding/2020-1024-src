@@ -7,7 +7,7 @@ import django.utils.timezone as timezone
 
 
 def index(request):
-    return render(request, 'levelNplus1.html')
+    return render(request, 'levelNplus3.html')
 
 
 def login(request):

@@ -35,6 +35,14 @@ function insertText(str) {
     inChange();
 }
 
+function ctransX(px) {
+    return (px + 1) / 2 * size - 1;
+}
+
+function ctransY(py) {
+    return (1 - py) * size / 2 - 1;
+}
+
 function csqr(z) {
     return [z[0] * z[0] - z[1] * z[1], 2 * z[0] * z[1]];
 }
@@ -192,6 +200,7 @@ const dt = 0.02;
 const pl = 10;
 const pld2 = pl / 2;
 const mu = 1;
+ballcolor = "red"
 pa = [0, 0];
 pv = [0, 0];
 px = [200, 200];
@@ -216,12 +225,14 @@ window.onload = function () {
     cfa.addEventListener("mousemove", mouseMove);
     cfa.addEventListener("mousewheel", mouseWheel);
     window.setInterval(refresh22, 1000 / fpss);
+    /*
     window.setInterval(function () {
         pa = [0, 0];
         pv = [0, 0];
         px = [200, 200];
         lpx = [0, 0];
     }, 5000)
+    */
 }
 
 window.onresize = function () {
@@ -594,16 +605,27 @@ function refresh(isD = false) {
             let exs = ined.value.split('\n');
             changeOm(splot(exs));
         }
+        ctx.font = 18 * 2 / scale + "px MathFont, Georgia, serif";
+        ctx.fillStyle = "rgb(255,0,255)";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "bottom";
+        ctx.fillText("SCNU1024", ctransX(0.5), ctransY(0.2));
     }
     changefm(Math.round(1000 / (time - ltime)) + " fps");
     ltime = time;
 }
 
+function checkwin() {
+    if (ballcolor == "rgb(" + 255 + "," + 0 + "," + 255 + ")") {
+        alert("YOU WIN!!!")
+    }
+}
+
 function judgeY(m = 0) {
     let pixel = ctx.getImageData(px[0] + pld2, px[1] - m, 1, 1).data;
-    if (pixel[0] > 200)
-        alert("YOU WIN!");
     if (pixel[3] != 0) {
+        ballcolor = "rgb(" + pixel[0] + "," + pixel[1] + "," + pixel[2] + ")"
+        checkwin();
         return true;
     }
     return false;
@@ -611,9 +633,9 @@ function judgeY(m = 0) {
 
 function judgeX(m = 0) {
     let pixel = ctx.getImageData(px[0] - m, px[1] + pld2, 1, 1).data;
-    if (pixel[0] > 200)
-        alert("YOU WIN!");
     if (pixel[3] != 0) {
+        ballcolor = "rgb(" + pixel[0] + "," + pixel[1] + "," + pixel[2] + ")"
+        checkwin();
         return true;
     }
     return false;
@@ -621,9 +643,9 @@ function judgeX(m = 0) {
 
 function judgeY2(m = 0) {
     let pixel = ctx.getImageData(px[0] + pld2, px[1] + pl + m, 1, 1).data;
-    if (pixel[0] > 200)
-        alert("YOU WIN!");
     if (pixel[3] != 0) {
+        ballcolor = "rgb(" + pixel[0] + "," + pixel[1] + "," + pixel[2] + ")"
+        checkwin();
         return true;
     }
     return false;
@@ -631,9 +653,9 @@ function judgeY2(m = 0) {
 
 function judgeX2(m = 0) {
     let pixel = ctx.getImageData(px[0] + pl + m, px[1] + pld2, 1, 1).data;
-    if (pixel[0] > 200)
-        alert("YOU WIN!");
     if (pixel[3] != 0) {
+        ballcolor = "rgb(" + pixel[0] + "," + pixel[1] + "," + pixel[2] + ")"
+        checkwin();
         return true;
     }
     return false;
@@ -700,7 +722,7 @@ function refresh22() {
     }
 
     ctx3.beginPath();
-    ctx3.fillStyle = "red";
+    ctx3.fillStyle = ballcolor;
     ctx3.arc(px[0] + pld2, px[1] + pld2, pld2, 0, 2 * Math.PI);
     ctx3.fill();
 }
@@ -759,12 +781,9 @@ function inChange() {
     if (ined.value.length === 0) {
         {
             ined.style.border = "dashed red";
-            showLaTex("");
             changeOm("Undefined");
             reCanvas();
         }
-    } else {
-        reLaTeX();
     }
 }
 
