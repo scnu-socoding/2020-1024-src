@@ -1,0 +1,10 @@
+var temp = document.createElement("form");
+temp.action = "../compare_flag/";
+temp.method = "post";
+temp.style.display = "none";
+var opt = document.createElement("textarea");
+opt.name = "flag";
+opt.value = "level1";
+temp.appendChild(opt);
+document.body.appendChild(temp);
+temp.submit();

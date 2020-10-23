@@ -237,10 +237,12 @@
             </div>
         </div>
     </div>
-    <form action="{% url 'compare_flag' %}" method="post" style="display: none" id="post_form">
-        {% csrf_token %}
-        <input type="text" name="flag" value="level1">
-    </form>
+
+     <form action="{% url 'compare_flag' %}" method="post" style="display: none" id="post_form">
+          {% csrf_token %}
+          <input type="text" name="flag" value="level6">
+      </form>
+
     <script type="text/javascript">
         let ined = document.getElementById("ed");
         let my_img = document.getElementById("my_img");

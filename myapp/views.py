@@ -142,6 +142,7 @@ def compare_flag(request):
     if user.rank < 7:
         if correct_flag[user.rank] == flag:
             user.rank += 1
+            user.lastflag = timezone.now()
             user.save()
             return redirect(reverse('play'))
         else:

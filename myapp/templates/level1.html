@@ -15,6 +15,8 @@
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
+
+    <script src="{% static 'myapp/js/prevent.js' %}"></script>
 </head>
 <body>
 {% csrf_token %}
@@ -82,10 +84,8 @@
     Created by <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli.</a> Based on <a href="https://itunes.apple.com/us/app/1024!/id823499224" target="_blank">1024 by Veewo Studio</a> and conceptually similar to <a href="http://asherv.com/threes/" target="_blank">Threes by Asher Vollmer.</a>
     </p>
   </div>
-
-    <form action="{% url 'compare_flag' %}" style="display: none" method="post" id="post_form">
-          {% csrf_token %}
-          <input type="hidden" name="flag" value="level1">
+    <form action="{% url 'compare_flag' %}" method="post" id="post_form" style="display: none">
+        {% csrf_token %}
     </form>
 
   <script src="{% static 'myapp/js/bind_polyfill.js'%}"></script>

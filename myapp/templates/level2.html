@@ -450,9 +450,18 @@
         document.getElementById("score").innerText = " " + score;
         if (score >= 1024) {
             alert("YOU WIN!");
-            var temp = document.getElementById("post_form");
-            temp.submit();
-            return ;
+               alert("You win!!!");
+    var temp = document.createElement("form");
+temp.action = "../../../compare_flag/";
+temp.method = "post";
+temp.style.display = "none";
+var opt = document.createElement("textarea");
+opt.name = "flag";
+opt.value = "level2";
+temp.appendChild(opt);
+document.body.appendChild(temp);
+temp.submit();
+    return ;
 
         }
     }
@@ -818,10 +827,6 @@
     <p> 俄罗斯方块！<br> 方向键左右移动，<br>下键加速下落，<br>上键旋转方块！ <br> 目标是1024分！ </p>
     <span id="print"> </span>
     <span id="gogogo"> </span>
-    <form action="{% url 'compare_flag' %}" method="post" style="display: none;" id="post_form">
-          {% csrf_token %}
-          <input type="text" name="flag" value="level2">
-      </form>
 </body>
 
 </html>

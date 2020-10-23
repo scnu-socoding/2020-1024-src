@@ -1,3 +1,8 @@
+function getCookie(name){
+    var r = document.cookie.match("\\b"+name+"=([^;]*)\\b");
+    return r ? r[1] : undefined
+}
+
 let ined = document.getElementById("ed");
         let my_img = document.getElementById("my_img");
         let my_text = document.getElementById("my_text");
@@ -22,9 +27,15 @@ let ined = document.getElementById("ed");
                 my_img.src = "{% static 'myapp/img/level_decoding_image1.jpg'%}";
                 setTimeout(() => {
                     alert("YOU WIN!!!!"); /********输入flag0.8s后过关**********/
-                    var temp = document.getElementById("post_form");
-                    temp.submit();
-                    return ;
+
+    var temp = document.getElementById("post_form");
+var opt = document.createElement("textarea");
+opt.name = "flag";
+opt.value = "level3";
+temp.appendChild(opt);
+document.body.appendChild(temp);
+temp.submit();
+    return ;
                 }, 800);
             }
         }
