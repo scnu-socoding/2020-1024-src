@@ -4,10 +4,11 @@ import re
 from django.contrib import messages
 from .models import STUDB
 import django.utils.timezone as timezone
+import hashlib
 
 
 def index(request):
-    return render(request, 'levelNplus3.html')
+    return render(request, 'login.html')
 
 
 def login(request):
@@ -39,6 +40,9 @@ def register(request):
 
 
 def register_to_db(request):
+    # 实例化md5方法
+    md5 = hashlib.md5()
+
     userid = request.POST.get('userid', None)
     username = request.POST.get('username', None)
     passwd = request.POST.get('passwd', None)
@@ -54,8 +58,13 @@ def register_to_db(request):
     users = STUDB.objects.filter(userid=userid)
     if len(users) == 1:
         return redirect(reverse('register')+"?code=-1")
+
+    # 对密码进行加密
+    md5.update(passwd.encode())
+    passwd_md5 = md5.hexdigest()
+
     STUDBdent = STUDB.objects.create(
-        userid=userid, username=username, passwd=passwd)
+        userid=userid, username=username, passwd=passwd_md5)
     STUDBdent.save()
     return redirect(reverse('login')+"?code=1")
 
@@ -63,9 +72,16 @@ def register_to_db(request):
 def check_user(request):
     id = request.POST.get('id', None)
     passwd = request.POST.get('passwd', None)
+    # 实例化md5方法
+    md5 = hashlib.md5()
+
+    # 对密码进行加密
+    md5.update(passwd.encode())
+    passwd_md5 = md5.hexdigest()
+
     if not id or not passwd:
         return redirect(reverse('login')+"?code=-2")
-    users = STUDB.objects.filter(userid=id, passwd=passwd)
+    users = STUDB.objects.filter(userid=id, passwd=passwd_md5)
     if len(users) == 1:
         request.session['userid'] = id
         request.session['is_login'] = '1'
@@ -75,24 +91,31 @@ def check_user(request):
 
 
 def play(request):
-    return render(request, 'levelNplus0.html')
     if request.session.get('is_login') == '1':
         code = request.GET.get('code', None)
         userid = request.session['userid']
         user = STUDB.objects.filter(userid=userid).last()
-        if user.rank < 3 and code == '-1':
+        if user.rank < 6 and code == '-1':
             messages.error(request, "哎呀，错了orz")
-        if user.rank > 2 and code == '-1':
-            messages.error(request, "终局之战总是很坎坷的，请再找找flag是什么吧_(:з」∠)_")
+
+        if user.rank > 6 and code == '-1':
+            messages.error(request, "终局之战总是很坎坷的，请再尝试其他方法吧_(:з」∠)_")
+
         if code == '1':
             messages.success(request, '登录成功(｡･ω･｡)ﾉ♡')
-        if user.rank > 2 and code == '2':
+
+        if user.rank > 7 and code == '2':
             messages.success(request, '哦吼！恭喜你发现了不得了的β时间线，这一切都是命运石之门的选择~！')
-        if user.rank > 3:
-            url = 'level3.html'
+
+        if user.rank > 7:
+            url = '404.html' # 彩蛋关
         else:
             url = 'level' + str(user.rank) + '.html'
-        return render(request, url)
+            return render(request, url)
+
+        if user.rank > 7 and code == '1024':
+            return render(request, 'win.html')
+
     else:
         return redirect(reverse('login')+"?code=-3")
 
@@ -100,42 +123,51 @@ def play(request):
 def compare_flag(request):
     correct_flag = [
         '',
-        '2048',
+        'level1',
+        'level2',
+        'level3',
+        'level4',
+        'level5',
+        'level6',
+        'level7',   # 普通关最后一关
     ]
     flag = request.POST.get('flag', None)
     userid = request.session['userid']
     user = STUDB.objects.filter(userid=userid).last()
-    if user.rank < 2:
+    if user.rank < 7:
         if correct_flag[user.rank] == flag:
             user.rank += 1
             user.save()
             return redirect(reverse('play'))
         else:
             return redirect(reverse('play')+"?code=-1")
-    elif user.rank == 2:
-        if flag == 'sdltql':
-            user.lastflag = timezone.now()
-            user.timesubtract = (
-                user.lastflag - user.firstflag).total_seconds()
-            user.rank += 1
-            user.save()
-            return redirect(reverse('play'))
-        else:
-            return redirect(reverse('play')+"?code=-1")
-    elif user.rank > 2:
-        if flag == 'happy':
+    # elif user.rank == 7:
+    #     if flag == 'level7':
+    #         user.lastflag = timezone.now()
+    #         user.timesubtract = (
+    #             user.lastflag - user.firstflag).total_seconds()
+    #         user.rank += 1
+    #         user.save()
+    #         return redirect(reverse('play'))
+    #     else:
+    #         return redirect(reverse('play')+"?code=-1")
+    elif user.rank == 7:
+        if flag == 'final':
             user.superflag = timezone.now()
             user.timesubtract_last = (
                 user.superflag-user.firstflag).total_seconds()
-            user.rank = 4
+            user.rank = 8
             user.save()
             return redirect(reverse('win'))
-        elif flag == '666':
+        elif flag == '10241024':
+            response = redirect(reverse('play')+"?code=2")
+            # 写入cookie
+            response.set_signed_cookie("I_AM_A_KEY", "code=1024")
             user.specialflag = timezone.now()
             user.timesubtract_suprise = (
                 user.firstflag - user.specialflag).total_seconds()
             user.save()
-            return redirect(reverse('play')+"?code=2")
+            return response
         else:
             return redirect(reverse('play')+"?code=-1")
     return redirect(reverse('play'))
@@ -145,7 +177,7 @@ def win(request):
     if request.session.get('is_login') == '1':
         userid = request.session['userid']
         user = STUDB.objects.filter(userid=userid).last()
-        if user.rank == 4:
+        if user.rank == 8:
             return render(request, 'win.html')
         else:
             return redirect(reverse('play'))
