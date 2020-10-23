@@ -22,7 +22,7 @@
         }
     </style>
 </head>
-<title>SCNU 1024 Level N+2</title>
+<title>Level 7</title>
 <body>
     {% load static %}
     <div id="father">
@@ -41,6 +41,13 @@
         <h3 id="outm"></h3>
         <h3 id="mes"></h3>
     </div>
+
+    <form action="{% url 'compare_flag' %}" method="post" id="post_form">
+          {% csrf_token %}
+        <!-- 2a1585a864d9e67627c6ae04c807a2c5 -->
+          <input type="text" name="flag">
+            <input type="submit" value="Submit"/>
+      </form>
 </body>
 
 <script src="{% static 'myapp/js/math.min.js'%}"></script>
@@ -176,7 +183,7 @@
         outm.innerHTML = "";
         if (lvn > levels.length) { //判断是否完成所有关卡
             /*玩家通过！！！！！！！！！！！！！！！！！！！！！！*/
-            alert("你已通关！你的平均得分是" + score / levels.length + "分（满分20000）。新的关卡正在开发中...");
+            alert("你已通关！你的平均得分是" + score / levels.length + "分（满分20000）。flag: 10241024");
             /*玩家通过！！！！！！！！！！！！！！！！！！！！！！*/
             return;
         }

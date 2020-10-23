@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<title>Level 4</title>
+<!--这里引用了一个[框架](https://www.mdui.org/)-->
+<link
+  rel="stylesheet"
+  href="../static/myapp/css/mdui.min.css"
+/>
+</head>
+<body class="mdui-theme-primary-blue-grey mdui-theme-accent-orange mdui-appbar-with-toolbar mdui-drawer-body-left">
+  <header class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
+    <div class="mdui-toolbar mdui-color-theme">
+      <a href="javascript:;" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target:'#main-drawer', swipe:true}"><i class="mdui-icon material-icons">menu</i></a>
+      <span class="mdui-typo-title">Level 5  - 1024点</span>
+      <div class="mdui-toolbar-spacer"></div>
+      <a href='#' class="mdui-btn mdui-btn-icon" onclick="location.reload()"><i class="mdui-icon material-icons">refresh</i></a>
+    </div>
+  </header>
+  <nav class="mdui-drawer" id="main-drawer">
+    <ul class="mdui-list" style="max-width: 360px;">
+      <!--接下来这里填写上一关的url-->
+      <a href="/myapp/templates/404.html">
+        <li class="mdui-list-item mdui-ripple">
+          <i class="mdui-list-item-icon mdui-icon material-icons">arrow_back</i>
+          <div class="mdui-list-item-content">跳转至上一题</div>
+        </li>
+      </a>
+      <a href="#">
+        <li class="mdui-list-item mdui-ripple" onclick="mduiSnackBar('不是说了没有后门吗，老老实实通关才是正道')">
+          <i class="mdui-list-item-icon mdui-icon material-icons">arrow_forward</i>
+          <div class="mdui-list-item-content">跳转至下一题</div>
+        </li>
+      </a>
+      <a href="#">
+        <li class="mdui-list-item mdui-ripple" onclick="location.reload()">
+          <i class="mdui-list-item-icon mdui-icon material-icons">refresh</i>
+          <div class="mdui-list-item-content">重置游戏</div>
+        </li>
+      </a>
+    </ul>
+  </nav>
+
+
+  <div class="mdui-container">
+    <div class="mdui-row">
+      <div class="mdui-col-xs-12 mdui-col-md-7">
+        <div class="mdui-typo">
+          <h1 class="mdui-text-color-theme">欢迎</h1>
+          <p>经过一路上过关斩将，你已经来到了游戏的第 5 关。恭喜你！</br>
+            与先前的阴间题目不同的是，想要通过本关非常简单——你不需要过硬的技术，只需要非常的运气。</p>
+          <h1 class="mdui-text-color-theme">你要做</h1>   
+          <p>看到下面的进度指示器和按钮了吗？每个按钮都代表着一个随机数，你需要通过点击按钮，令我们的进度指示器<strong>归满</strong>；</p>
+          <h1 class="mdui-text-color-theme">注意</h1> 
+          <p>点击按钮后，进度条增加相应数值，该按钮对应数值<strong>随机</strong>刷新，其余按钮数值保持不变。</br>
+            必须<strong>正好归满</strong>，否则游戏瞬间爆炸。</br>
+            游戏本身允许<u>无限次</u>重试。</br>
+            觉得自己太非这游戏没法玩？那也没有办法，你以为游戏开发者会留后门吗？
+          </p>
+          <div class="mdui-divider-dark"></div></br>
+          <p>规则了解清楚了吗？那么，让我们开始吧！</p>
+        </div>
+      </div>
+      <div class="mdui-col-xs-12 mdui-col-md-5">
+        <div class="mdui-card mdui-m-y-5">
+          <div class="mdui-card-header">
+            <div class="mdui-card-header-avatar mdui-valign mdui-m-l-1"><i class="mdui-icon material-icons">tv</i></div>
+            <div class="mdui-card-header-title">指示器</div>
+            <div id="sum" class="mdui-card-header-subtitle">你需要达到的值为 1024 ,当前值为 0 </div>
+          </div>
+          <div class="mdui-card-content">
+            <div class="mdui-progress">
+              <div id="progress" class="mdui-progress-determinate" style="width: 0%;"></div>
+            </div>
+          </div>
+          <div id="btns" class="mdui-card-actions">
+            <button class="mdui-btn mdui-ripple" id="btn1" onclick="clickBtn1()">+0</button>
+            <button class="mdui-btn mdui-ripple" id="btn2" onclick="clickBtn2()">+0</button>
+            <button class="mdui-btn mdui-ripple" id="btn3" onclick="clickBtn3()">+0</button>
+            <button class="mdui-btn mdui-ripple" id="btn4" onclick="clickBtn4()">+0</button>
+          </div>
+        </div>
+        <div id="console" class="mdui-card mdui-m-y-5" style="display: none;">
+          <div class="mdui-card mdui-m-y-5">
+            <div class="mdui-card-header">
+              <div class="mdui-card-header-avatar mdui-valign mdui-m-l-1"><i class="mdui-icon material-icons">bug_report</i></div>
+              <div class="mdui-card-header-title">控制台</div>
+              <div class="mdui-card-header-subtitle">你似乎打开了什么不应存在的东西</div>
+            </div>
+            <div class="mdui-card-content">
+              <form method="post">
+                <div class="mdui-textfield mdui-textfield-floating-label">
+                  <label class="mdui-textfield-label">Btn1</label>
+                  <input type="text" id="btn1text" class="mdui-textfield-input">
+                </div>
+                <div class="mdui-textfield mdui-textfield-floating-label">
+                  <label class="mdui-textfield-label">Btn2</label>
+                  <input type="text" id="btn2text" class="mdui-textfield-input">
+                </div>
+                <div class="mdui-textfield mdui-textfield-floating-label">
+                  <label class="mdui-textfield-label">Btn3</label>
+                  <input type="text" id="btn3text" class="mdui-textfield-input">
+                </div>
+                <div class="mdui-textfield mdui-textfield-floating-label">
+                  <label class="mdui-textfield-label">Btn4</label>
+                  <input type="text" id="btn4text" class="mdui-textfield-input">
+                </div>
+              </form>
+            </div>
+            <div class="mdui-card-actions">
+              <button class="mdui-btn mdui-ripple" onclick="getInput()">Submit</button>
+            </div>
+          </div>
+        </div>
+
+      <form action="{% url 'compare_flag' %}" method="post" style="display:none;" id="post_form">
+          {% csrf_token %}
+          <input type="text" name="flag" value="level4">
+      </form>
+      </div>
+    </div>
+  </div>
+
+  <footer></footer>
+
+  <script>
+    var sum = 0;
+    var btn1 = rand();
+    var btn2 = rand();
+    var btn3 = rand();
+    var btn4 = rand();
+    document.getElementById("btn1").innerHTML = "+"+btn1;
+    document.getElementById("btn2").innerHTML = "+"+btn2;
+    document.getElementById("btn3").innerHTML = "+"+btn3;
+    document.getElementById("btn4").innerHTML = "+"+btn4;
+  
+    document.getElementById("progress").style="width: 0%;";
+
+    //这里写下一关的url
+    var accepted = "<a href='#'><button class=\"mdui-btn mdui-ripple mdui-color-green\"><span class=\"mdui-text-color-white-text\">Accepted</span></button></a>"
+
+    var btn1c = 0;
+    var btn2c = 0;
+    var btn3c = 0;
+    var btn4c = 0;
+
+    function checkConsole()
+    {
+      if(btn1c == 1&&btn2c == 0&&btn3c == 2&&btn4c == 4)
+      {
+        document.getElementById("console").style="display: inline;";
+      }
+    }
+
+    function mduiSnackBar(message)
+    {
+      mdui.snackbar({
+        message: message
+      });
+    }
+  
+    function rand()
+    {
+      return Math.round(Math.random() * 100);
+    }
+
+    
+    function getInput()
+    {
+        btn1 = Number(document.getElementById("btn1text").value);
+        btn2 = Number(document.getElementById("btn2text").value);
+        btn3 = Number(document.getElementById("btn3text").value);
+        btn4 = Number(document.getElementById("btn4text").value);
+        document.getElementById("btn1").innerHTML = "+"+btn1;
+        document.getElementById("btn2").innerHTML = "+"+btn2;
+        document.getElementById("btn3").innerHTML = "+"+btn3;
+        document.getElementById("btn4").innerHTML = "+"+btn4;
+    }
+  
+    function clickBtn1()
+    {
+      btn1c += 1;
+      checkConsole();
+      sum += btn1;
+      var next = rand();
+      var percentage = Math.floor((sum/1024)*100);
+      document.getElementById("sum").innerHTML = "你需要达到的值为 1024 ,当前值为 "+ sum;
+      document.getElementById("progress").style="width: "+percentage+"%;";
+      if(sum > 1024)
+      {
+        document.getElementById("btns").innerHTML="<button class=\"mdui-btn mdui-ripple mdui-color-red\" onclick=\"location.reload()\">Retry</button>";
+      }
+      else if(sum == 1024)
+      {
+          alert("过关！");
+            var temp = document.getElementById("post_form");
+            temp.submit();
+            return ;
+      }
+      else
+      {
+        document.getElementById("btn1").innerHTML = "+" + next;
+      }
+      btn1 = next;
+    }
+    function clickBtn2()
+    {
+      btn2c += 1;
+      checkConsole();
+      sum += btn2;
+      var next = rand();
+      var percentage = Math.floor((sum/1024)*100);
+      document.getElementById("sum").innerHTML = "你需要达到的值为 1024 ,当前值为 "+ sum;
+      document.getElementById("progress").style="width: "+percentage+"%;";
+      if(sum > 1024)
+      {
+        document.getElementById("btns").innerHTML="<button class=\"mdui-btn mdui-ripple mdui-color-red\" onclick=\"location.reload()\">Retry</button>";
+      }
+      else if(sum == 1024)
+      {
+        document.getElementById("btns").innerHTML=accepted;
+        var temp = document.getElementById("post_form");
+        temp.submit();
+        return ;
+      }
+      else
+      {
+        document.getElementById("btn2").innerHTML = "+" + next;
+      }
+      btn2 = next;
+    }
+    function clickBtn3()
+    {
+      btn3c += 1;
+      checkConsole();
+      sum += btn3;
+      var next = rand();
+      var percentage = Math.floor((sum/1024)*100);
+      document.getElementById("sum").innerHTML = "你需要达到的值为 1024 ,当前值为 "+ sum;
+      document.getElementById("progress").style="width: "+percentage+"%;";
+      if(sum > 1024)
+      {
+        document.getElementById("btns").innerHTML="<button class=\"mdui-btn mdui-ripple mdui-color-red\" onclick=\"location.reload()\">Retry</button>";
+      }
+      else if(sum == 1024)
+      {
+        document.getElementById("btns").innerHTML=accepted;
+        var temp = document.getElementById("post_form");
+            temp.submit();
+            return ;
+      }
+      else
+      {
+        document.getElementById("btn3").innerHTML = "+" + next;
+      }
+      btn3 = next;
+    }
+    function clickBtn4()
+    {
+      btn4c += 1;
+      checkConsole();
+      sum += btn4;
+      var next = rand();
+      var percentage = Math.floor((sum/1024)*100);
+      document.getElementById("sum").innerHTML = "你需要达到的值为 1024 ,当前值为 "+ sum;
+      document.getElementById("progress").style="width: "+percentage+"%;";
+      if(sum > 1024)
+      {
+        document.getElementById("btns").innerHTML="<button class=\"mdui-btn mdui-ripple mdui-color-red\" onclick=\"location.reload()\">Retry</button>";
+      }
+      else if(sum == 1024)
+      {
+        document.getElementById("btns").innerHTML=accepted;
+        var temp = document.getElementById("post_form");
+            temp.submit();
+            return ;
+      }
+      else
+      {
+        document.getElementById("btn4").innerHTML = "+" + next;
+      }
+      btn4 = next;
+    }
+  </script>
+
+  <script
+  src="../static/myapp/js/mdui.min.js"
+></script>
+</body>
+</html>

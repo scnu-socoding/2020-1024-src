@@ -5,11 +5,13 @@
     <meta charset="utf-8">
     <title>Login</title>
     {% load static %}
-    <link href="{%static 'myapp/css/style.css'%}" rel="stylesheet">
+    <link href="{% static 'myapp/css/style.css'%}" rel="stylesheet">
+    <link href="{% static 'myapp/css/mdui.min.css' %}" rel="stylesheet">
+    <script src="{% static 'myapp/js/mdui.min.js' %}"></script>
 </head>
 
 <body>
-    <div class="lg_content">
+    <div class="lg_content mdui-textfield">
         <table cellspacing="30px" style="width: 250px" align="center">
             <tr>
                 <td colspan="2" align="left">
@@ -20,24 +22,24 @@
                 {% csrf_token %}
                 <tr>
                     <td colspan="2">
-                        <input type="text" name="id" class="lg_ip" placeholder="学号">
+                        <input type="text" name="id" class="mdui-textfield-input" placeholder="学号">
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <input type="password" name="passwd" class="lg_ip" placeholder="密码">
+                        <input type="password" name="passwd" class="mdui-textfield-input" placeholder="密码">
                     </td>
                 </tr>
                 <tr>
                     <td align="right">
-                        <input type="submit" value="提交" class="button" style="position:relative;left:-50px">
+                        <input type="submit" value="提交" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-blue-50" style="position:relative;left:-50px;color: white">
                     </td>
                 </tr>
             </form>
             <tr>
                 <td align="left">
                     <span class="font1">没有账号？</span>
-                    <input type="submit" class="button" style="height:25px;width:80px;font-size:12px" value="注册"
+                    <input type="submit" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-blue-50" value="注册"
                         onclick="location.href='{% url 'register' %}'">
                 </td>
             </tr>

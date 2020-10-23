@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>404 NOT FOUND</title>
     <style>
         body{
             margin:0px;
@@ -43,6 +43,9 @@
             text-align: center;
         }
     </style>
+    <script>
+
+    </script>
 </head>
 <body>
     <div class="container">
@@ -57,8 +60,16 @@
             <div>
                 <p>你发现了不得了的东西</p>
                 <!-- 要不尝试改下url? -->
+                <!-- 提示：今天是个好日子！ -->
             </div>
         </div>
     </div>
 </body>
 </html>
+{% if messages %}
+<script>
+    {% for msg in messages %}
+         alert('{{msg.message}}')
+    {% endfor %}
+</script>
+{% endif %}

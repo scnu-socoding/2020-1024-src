@@ -1,275 +1,319 @@
-<!doctype html>
-<html lang="zh-cn">
+<!DOCTYPE html>
+<html>
+
 <head>
-<meta charset="utf-8">
-<title>Level 5 - SCNU-SoCoding 2020-1024</title>
-<!--这里引用了一个[框架](https://www.mdui.org/)-->
-<link
-  rel="stylesheet"
-  href="../static/myapp/css/mdui.min.css"
-/>
+    {% load static %}
+    <meta charset="utf-8">
+
+    <link rel="icon" href="{% static 'myapp/img/logo.png'%}">
+
+    <title>Level 5</title>
+    <meta name="description" content="1024 Level Nplus1 that works in mobile browsers.">
+
+    <script type="text/javascript" src="{% static 'myapp/js/dat.gui.min.js'%}"></script>
+    <style>
+        * {
+            user-select: none;
+        }
+
+        html,
+        body {
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        body {
+            margin: 0;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        .dg {
+            opacity: 0.9;
+        }
+
+        .dg .property-name {
+            overflow: visible;
+        }
+
+        .bigFont {
+            font-size: 150%;
+            color: #ffffff;
+        }
+
+        .cr.function.appBigFont {
+            font-size: 150%;
+            line-height: 27px;
+            color: #ff00c8;
+            background-color: #023C40;
+        }
+
+        .cr.function.appBigFont .property-name {
+            float: none;
+        }
+
+        .cr.function.appBigFont .icon {
+            position: sticky;
+            bottom: 27px;
+        }
+
+        .icon {
+            font-family: 'iconfont';
+            font-size: 130%;
+            float: right;
+        }
+
+        .promo {
+            display: none;
+            /* display: table; */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: auto;
+            color: lightblue;
+            background-color: rgba(0, 0, 0, 0.4);
+            animation: promo-appear-animation 0.35s ease-out;
+        }
+
+        .promo-middle {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .promo-content {
+            width: 80vw;
+            height: 80vh;
+            max-width: 80vh;
+            max-height: 80vw;
+            margin: auto;
+            padding: 0;
+            font-size: 2.8vmax;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+            text-align: center;
+            background-image: url("{% static 'myapp/img/promo_back.png'%}");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        .promo-header {
+            height: 10%;
+            padding: 2px 16px;
+        }
+
+        .promo-close {
+            width: 10%;
+            height: 100%;
+            text-align: left;
+            float: left;
+            font-size: 1.3em;
+            /* transition: 0.2s; */
+        }
+
+        .promo-close:hover {
+            /* transform: scale(1.25); */
+            cursor: pointer;
+        }
+
+        .promo-body {
+            padding: 8px 16px 16px 16px;
+            margin: auto;
+        }
+
+        .promo-body p {
+            margin-top: 0;
+            mix-blend-mode: color-dodge;
+        }
+
+
+        @keyframes promo-appear-animation {
+            0% {
+                transform: scale(2.0);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1.0);
+                opacity: 1;
+            }
+        }
+
+        #ed {
+            font-size: 24px;
+            font-weight: bold;
+            width: 50%;
+            height: 40%;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            resize: none;
+            color: #fff;
+            background: transparent;
+            border-style: none;
+            user-select: none;
+            font-family: "JetBrains Mono Medium", "Consolas", "Menlo", "Monaco", monospace, serif;
+            border: none;
+            outline: none;
+        }
+
+        #my_text {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 6%;
+            width: 60%;
+            height: 60%;
+            color: #fff;
+            user-select: none;
+            resize: none;
+            background: transparent;
+            font-family: "JetBrains Mono Medium", "Consolas", "Menlo", "Monaco", monospace, serif;
+            border: none;
+            outline: none;
+        }
+
+        #my_text22 {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 6%;
+            width: 60%;
+            height: 60%;
+            color: rgb(0, 255, 13);
+            user-select: none;
+            resize: none;
+            background: transparent;
+            font-family: "JetBrains Mono Medium", "Consolas", "Menlo", "Monaco", monospace, serif;
+            border: none;
+            outline: none;
+        }
+
+        /* 核心CSS */
+        .music-box ul {
+            display: flex;
+            display: -webkit-flex;
+            justify-content: center;
+            -webkit-justify-content: center;
+            width: 96%;
+            margin: 0 auto 12%;
+        }
+
+        .music-box li {
+            flex: 1;
+            -webkit-flex: 1;
+            position: relative;
+            margin: 0 4px;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .music-box li span {
+            display: block;
+            height: 200px;
+            box-shadow: 0 0 10px #000;
+            border-radius: 4px;
+            background-color: #fff;
+            cursor: pointer;
+        }
+
+        .music-box li span.cur {
+            background-color: #999;
+        }
+
+        .music-box li i {
+            position: absolute;
+            bottom: -30px;
+            width: 100%;
+            text-align: center;
+            font-style: normal;
+        }
+
+        .music-box li i.low::before,
+        .music-box li i.high::before {
+            content: '·';
+            position: absolute;
+            left: 0;
+            width: 100%;
+        }
+
+        .music-box li i.low::before {
+            bottom: -10px;
+        }
+
+        .music-box li i.high::before {
+            top: -10px;
+        }
+    </style>
+    <script>
+        window.ga = window.ga || function () {
+            (ga.q = ga.q || []).push(arguments)
+        };
+        ga.l = +new Date;
+        ga('create', 'UA-105392568-1', 'auto');
+        ga('send', 'pageview');
+    </script>
 </head>
+<body ondragstart="return false" oncontextmenu="return false" ondragstart="return false" onselect="return false"
+    onselect="document.selection.empty()" onpaste="return false" oncopy="return false" oncut="return false">
+    <canvas style="position: absolute;z-index: -4;"></canvas>
+    <p style="color:white;text-align: center;">SCNU 1024 Level Nplus1</p>
+    <img src="{% static 'myapp/img/stars.png'%}">
+    <!-- 核心HTML -->
+    <div class="music-box"></div>
 
-<body class="mdui-theme-primary-blue-grey mdui-theme-accent-orange mdui-appbar-with-toolbar mdui-drawer-body-left">
-  <header class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
-    <div class="mdui-toolbar mdui-color-theme">
-      <a href="javascript:;" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target:'#main-drawer', swipe:true}"><i class="mdui-icon material-icons">menu</i></a>
-      <span class="mdui-typo-title">Level 5  - 1024点</span>
-      <div class="mdui-toolbar-spacer"></div>
-      <a href='#' class="mdui-btn mdui-btn-icon" onclick="location.reload()"><i class="mdui-icon material-icons">refresh</i></a>
+    <!-- Mother fucker pls forgive me -->
+    <div class="promo">
+        <div class="promo-middle">
+            <div class="promo-content">
+                <div class="promo-header">
+                    <span class="promo-close">&times;</span>
+                </div>
+                <div class="promo-body">
+                    <p>请使用现代化浏览器进行游戏</p>
+                </div>
+            </div>
+        </div>
     </div>
-  </header>
-  <nav class="mdui-drawer" id="main-drawer">
-    <ul class="mdui-list" style="max-width: 360px;">
-      <!--接下来这里填写上一关的url-->
-      <a href="/myapp/templates/level4.html">
-        <li class="mdui-list-item mdui-ripple">
-          <i class="mdui-list-item-icon mdui-icon material-icons">arrow_back</i>
-          <div class="mdui-list-item-content">跳转至上一题</div>
-        </li>
-      </a>
-      <a href="#">
-        <li class="mdui-list-item mdui-ripple" onclick="mduiSnackBar('不是说了没有后门吗，老老实实通关才是正道')">
-          <i class="mdui-list-item-icon mdui-icon material-icons">arrow_forward</i>
-          <div class="mdui-list-item-content">跳转至下一题</div>
-        </li>
-      </a>
-      <a href="#">
-        <li class="mdui-list-item mdui-ripple" onclick="location.reload()">
-          <i class="mdui-list-item-icon mdui-icon material-icons">refresh</i>
-          <div class="mdui-list-item-content">重置游戏</div>
-        </li>
-      </a>
-    </ul>
-  </nav>
-
-
-  <div class="mdui-container">
-    <div class="mdui-row">
-      <div class="mdui-col-xs-12 mdui-col-md-7">
-        <div class="mdui-typo">
-          <h1 class="mdui-text-color-theme">欢迎</h1>
-          <p>经过一路上过关斩将，你已经来到了游戏的第 5 关。恭喜你！</br>
-            与先前的阴间题目不同的是，想要通过本关非常简单——你不需要过硬的技术，只需要非常的运气。</p>
-          <h1 class="mdui-text-color-theme">你要做</h1>   
-          <p>看到下面的进度指示器和按钮了吗？每个按钮都代表着一个随机数，你需要通过点击按钮，令我们的进度指示器<strong>归满</strong>；</p>
-          <h1 class="mdui-text-color-theme">注意</h1> 
-          <p>点击按钮后，进度条增加相应数值，该按钮对应数值<strong>随机</strong>刷新，其余按钮数值保持不变。</br>
-            必须<strong>正好归满</strong>，否则游戏瞬间爆炸。</br>
-            游戏本身允许<u>无限次</u>重试。</br>
-            觉得自己太非这游戏没法玩？那也没有办法，你以为游戏开发者会留后门吗？
-          </p>
-          <div class="mdui-divider-dark"></div></br>
-          <p>规则了解清楚了吗？那么，让我们开始吧！</p>
-        </div>
-      </div>
-      <div class="mdui-col-xs-12 mdui-col-md-5">
-        <div class="mdui-card mdui-m-y-5">
-          <div class="mdui-card-header">
-            <div class="mdui-card-header-avatar mdui-valign mdui-m-l-1"><i class="mdui-icon material-icons">tv</i></div>
-            <div class="mdui-card-header-title">指示器</div>
-            <div id="sum" class="mdui-card-header-subtitle">你需要达到的值为 1024 ,当前值为 0 </div>
-          </div>
-          <div class="mdui-card-content">
-            <div class="mdui-progress">
-              <div id="progress" class="mdui-progress-determinate" style="width: 0%;"></div>
-            </div>
-          </div>
-          <div id="btns" class="mdui-card-actions">
-            <button class="mdui-btn mdui-ripple" id="btn1" onclick="clickBtn1()">+0</button>
-            <button class="mdui-btn mdui-ripple" id="btn2" onclick="clickBtn2()">+0</button>
-            <button class="mdui-btn mdui-ripple" id="btn3" onclick="clickBtn3()">+0</button>
-            <button class="mdui-btn mdui-ripple" id="btn4" onclick="clickBtn4()">+0</button>
-          </div>
-        </div>
-        <div id="console" class="mdui-card mdui-m-y-5" style="display: none;">
-          <div class="mdui-card mdui-m-y-5">
-            <div class="mdui-card-header">
-              <div class="mdui-card-header-avatar mdui-valign mdui-m-l-1"><i class="mdui-icon material-icons">bug_report</i></div>
-              <div class="mdui-card-header-title">控制台</div>
-              <div class="mdui-card-header-subtitle">你似乎打开了什么不应存在的东西</div>
-            </div>
-            <div class="mdui-card-content">
-              <form method="post">
-                <div class="mdui-textfield mdui-textfield-floating-label">
-                  <label class="mdui-textfield-label">Btn1</label>
-                  <input type="text" id="btn1text" class="mdui-textfield-input">
-                </div>
-                <div class="mdui-textfield mdui-textfield-floating-label">
-                  <label class="mdui-textfield-label">Btn2</label>
-                  <input type="text" id="btn2text" class="mdui-textfield-input">
-                </div>
-                <div class="mdui-textfield mdui-textfield-floating-label">
-                  <label class="mdui-textfield-label">Btn3</label>
-                  <input type="text" id="btn3text" class="mdui-textfield-input">
-                </div>
-                <div class="mdui-textfield mdui-textfield-floating-label">
-                  <label class="mdui-textfield-label">Btn4</label>
-                  <input type="text" id="btn4text" class="mdui-textfield-input">
-                </div>
-              </form>
-            </div>
-            <div class="mdui-card-actions">
-              <button class="mdui-btn mdui-ripple" onclick="getInput()">Submit</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <footer></footer>
-
-  <script>
-    var sum = 0;
-    var btn1 = rand();
-    var btn2 = rand();
-    var btn3 = rand();
-    var btn4 = rand();
-    document.getElementById("btn1").innerHTML = "+"+btn1;
-    document.getElementById("btn2").innerHTML = "+"+btn2;
-    document.getElementById("btn3").innerHTML = "+"+btn3;
-    document.getElementById("btn4").innerHTML = "+"+btn4;
-  
-    document.getElementById("progress").style="width: 0%;";
-
-    //这里写下一关的url
-    var accepted = "<a href=\"#\"><button class=\"mdui-btn mdui-ripple mdui-color-green\"><span class=\"mdui-text-color-white-text\">Accepted</span></button></a>"
-
-    var btn1c = 0;
-    var btn2c = 0;
-    var btn3c = 0;
-    var btn4c = 0;
-
-    function checkConsole()
-    {
-      if(btn1c == 1&&btn2c == 0&&btn3c == 2&&btn4c == 4)
-      {
-        document.getElementById("console").style="display: inline;";
-      }
-    }
-
-    function mduiSnackBar(message)
-    {
-      mdui.snackbar({
-        message: message
-      });
-    }
-  
-    function rand()
-    {
-      return Math.round(Math.random() * 100);
-    }
-
-    
-    function getInput()
-    {
-        btn1 = Number(document.getElementById("btn1text").value);
-        btn2 = Number(document.getElementById("btn2text").value);
-        btn3 = Number(document.getElementById("btn3text").value);
-        btn4 = Number(document.getElementById("btn4text").value);
-        document.getElementById("btn1").innerHTML = "+"+btn1;
-        document.getElementById("btn2").innerHTML = "+"+btn2;
-        document.getElementById("btn3").innerHTML = "+"+btn3;
-        document.getElementById("btn4").innerHTML = "+"+btn4;
-    }
-  
-    function clickBtn1()
-    {
-      btn1c += 1;
-      checkConsole();
-      sum += btn1;
-      var next = rand();
-      var percentage = Math.floor((sum/1024)*100);
-      document.getElementById("sum").innerHTML = "你需要达到的值为 1024 ,当前值为 "+ sum;
-      document.getElementById("progress").style="width: "+percentage+"%;";
-      if(sum > 1024)
-      {
-        document.getElementById("btns").innerHTML="<button class=\"mdui-btn mdui-ripple mdui-color-red\" onclick=\"location.reload()\">Retry</button>";
-      }
-      else if(sum == 1024)
-      {
-        document.getElementById("btns").innerHTML=accepted;
-      }
-      else
-      {
-        document.getElementById("btn1").innerHTML = "+" + next;
-      }
-      btn1 = next;
-    }
-    function clickBtn2()
-    {
-      btn2c += 1;
-      checkConsole();
-      sum += btn2;
-      var next = rand();
-      var percentage = Math.floor((sum/1024)*100);
-      document.getElementById("sum").innerHTML = "你需要达到的值为 1024 ,当前值为 "+ sum;
-      document.getElementById("progress").style="width: "+percentage+"%;";
-      if(sum > 1024)
-      {
-        document.getElementById("btns").innerHTML="<button class=\"mdui-btn mdui-ripple mdui-color-red\" onclick=\"location.reload()\">Retry</button>";
-      }
-      else if(sum == 1024)
-      {
-        document.getElementById("btns").innerHTML=accepted;
-      }
-      else
-      {
-        document.getElementById("btn2").innerHTML = "+" + next;
-      }
-      btn2 = next;
-    }
-    function clickBtn3()
-    {
-      btn3c += 1;
-      checkConsole();
-      sum += btn3;
-      var next = rand();
-      var percentage = Math.floor((sum/1024)*100);
-      document.getElementById("sum").innerHTML = "你需要达到的值为 1024 ,当前值为 "+ sum;
-      document.getElementById("progress").style="width: "+percentage+"%;";
-      if(sum > 1024)
-      {
-        document.getElementById("btns").innerHTML="<button class=\"mdui-btn mdui-ripple mdui-color-red\" onclick=\"location.reload()\">Retry</button>";
-      }
-      else if(sum == 1024)
-      {
-        document.getElementById("btns").innerHTML=accepted;
-      }
-      else
-      {
-        document.getElementById("btn3").innerHTML = "+" + next;
-      }
-      btn3 = next;
-    }
-    function clickBtn4()
-    {
-      btn4c += 1;
-      checkConsole();
-      sum += btn4;
-      var next = rand();
-      var percentage = Math.floor((sum/1024)*100);
-      document.getElementById("sum").innerHTML = "你需要达到的值为 1024 ,当前值为 "+ sum;
-      document.getElementById("progress").style="width: "+percentage+"%;";
-      if(sum > 1024)
-      {
-        document.getElementById("btns").innerHTML="<button class=\"mdui-btn mdui-ripple mdui-color-red\" onclick=\"location.reload()\">Retry</button>";
-      }
-      else if(sum == 1024)
-      {
-        document.getElementById("btns").innerHTML=accepted;
-      }
-      else
-      {
-        document.getElementById("btn4").innerHTML = "+" + next;
-      }
-      btn4 = next;
-    }
-  </script>
-
-  <script
-  src="../static/myapp/js/mdui.min.js"
-></script>
+     <form action="{% url 'compare_flag' %}" method="post" style="display: none" id="post_form">
+          {% csrf_token %}
+          <input type="text" name="flag" value="level5">
+      </form>
+    <script type="text/javascript" src="{% static 'myapp/js/music.js'%}"></script>
+    <script type="text/javascript" src="{% static 'myapp/js/script.js'%}"></script>
+    <script type="text/javascript">
+        let music = new MusicBox('.music-box');
+        let arr_ans = [1, 1, 5, 5, 6, 6, 5, 4, 4, 3, 3, 2, 2, 1];
+        let sign = 0;
+        window.addEventListener("keydown", function (e) {
+            let i = (e.keyCode - 48) % music.arrFrequency.length;
+            if (i == arr_ans[sign]) {
+                sign++;
+                if (sign >= arr_ans.length) {
+                    /***************************关卡通过************************************/
+                    splatStack.push(50); /******关卡通过************************************/
+                    /***************************关卡通过************************************/
+                    var temp = document.getElementById("post_form");
+                    temp.submit();
+                    return ;
+                }
+                splatStack.push(20);
+            } else {
+                config.SPLAT_RADIUS = (music.arrFrequency.length - i) / 200;
+                splatStack.push((music.arrFrequency.length - i) / 10);
+                sign = 0;
+            }
+            music.createSound(music.arrFrequency[i]);
+        })
+    </script>
 </body>
+
 </html>

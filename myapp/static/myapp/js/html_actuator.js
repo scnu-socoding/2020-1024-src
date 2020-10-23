@@ -113,7 +113,8 @@ HTMLActuator.prototype.updateScore = function (score) {
 
   if (this.score >= 10000){
     alert("You win!!!");
-    window.location.href="https://cn.bing.com/";
+    var temp = document.getElementById("post_form");
+    temp.submit();
     return ;
   }
 

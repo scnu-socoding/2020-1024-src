@@ -4,17 +4,11 @@
 <head>
     {% load static %}
     <meta charset="utf-8">
-    <meta http-equiv="Cache-Control" content="no-cache">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
 
     <link rel="icon" href="{% static 'myapp/img/logo.png'%}">
 
-    <title>1024 Level D</title>
-    <meta name="description" content="1024 Level D that works in mobile browsers.">
+    <title>Level 6</title>
+    <meta name="description" content="1024 Level N that works in mobile browsers.">
 
     <script type="text/javascript" src="{% static 'myapp/js/dat.gui.min.js'%}"></script>
     <style>
@@ -162,10 +156,9 @@
             height: 40%;
             position: fixed;
             bottom: 20px;
-            right: 100px;
+            right: 20px;
             resize: none;
             color: #fff;
-            text-shadow: #ff00c8;
             background: transparent;
             border-style: none;
             user-select: none;
@@ -181,7 +174,6 @@
             width: 60%;
             height: 60%;
             color: #fff;
-            text-shadow: #ff00c8;
             user-select: none;
             resize: none;
             background: transparent;
@@ -197,7 +189,6 @@
             width: 60%;
             height: 60%;
             color: rgb(0, 255, 13);
-            text-shadow: #ff00c8;
             user-select: none;
             resize: none;
             background: transparent;
@@ -215,18 +206,12 @@
         ga('send', 'pageview');
     </script>
 </head>
-
 <body ondragstart="return false" oncontextmenu="return false" ondragstart="return false" onselect="return false"
     onselect="document.selection.empty()" onpaste="return false" oncopy="return false" oncut="return false">
     <canvas style="position: absolute;z-index: -4;"></canvas>
-    <p style="color:white;text-align: center;">SCNU 1024 Level D</p>
-    <p id="my_info_1" style="color:rgb(77, 142, 216);position: relative; left: 20%; ;top: 50%";>SQ==</p>
-    <p id="my_info_2" style="color:rgb(77, 142, 216);position: relative; left: 64%; ;top: 30%";>THV2</p>
-    <p id="my_info_3" style="color:rgb(77, 142, 216);position: relative; left: 46%; ;top: 10%";>U291dGg=</p>
-    <p id="my_info_4" style="color:rgb(77, 142, 216);position: relative; left: 29%; ;top: 60%";>Q2hpbmE=</p>
-    <p id="my_info_5" style="color:rgb(77, 142, 216);position: relative; left: 80%; ;top: 32%";>Tm9ybWFs</p>
-    <p id="my_info_6" style="color:rgb(77, 142, 216);position: relative; left: 13%; ;top: 55%";>VW5pdmVyc2l0eQ==</p>
-    <img id="my_img" style="position: relative; left: 45%; ;top: 2%;z-index: -3;" src="{% static 'myapp/img/level_decoding_image0.png'%}">
+    <p style="color:white;text-align: center;">SCNU 1024 Level N</p>
+    <img width="30%" height="30%" id="my_img" style="position: absolute;z-index: -3;"
+        src="{% static 'myapp/img/code_img.png'%}">
     <textarea id="my_text" disabled=true style="position: absolute;z-index: -3;" spellcheck="false"></textarea>
     <textarea id="my_text22" oninput="text22InChange()" disabled=true style="position: absolute;z-index: -2;"
         spellcheck="false"></textarea>
@@ -244,32 +229,47 @@
             </div>
         </div>
     </div>
+     <form action="{% url 'compare_flag' %}" method="post" style="display: none" id="post_form">
+          {% csrf_token %}
+          <input type="text" name="flag" value="level1">
+      </form>
     <script type="text/javascript">
         let ined = document.getElementById("ed");
         let my_img = document.getElementById("my_img");
         let my_text = document.getElementById("my_text");
-        window.onload = function()
-        {
-        document.getElementById('ed').onkeydown = function()
-        {   
-            if(ined.value.length >= 35){
-                event.returnValue = false;
-                if(ined.value != `I Luv South China Normal University`){
-                    alert("答案不对喔orz，再想想【滑稽】");
-                    window.location.reload();
-                }
+        let my_text22 = document.getElementById("my_text22");
+        text22InChange = function () {
+            splatStack.push(1);
+            if (my_text22.value === my_text.value) {
+                /***************************关卡通过************************************/
+                splatStack.push(50); /*****关卡通过************************************/
+                /***************************关卡通过************************************/
+
+                var temp = document.getElementById("post_form");
+                temp.submit();
+                return ;
             }
-        }
         }
         edInChange = function () {
             splatStack.push(1);
-            if (ined.value === `I Luv South China Normal University`) {
+            if (ined.value === `#include <stdio.h>
+
+int main(void)
+{
+    printf("Hello, World!");
+    return 0;
+}`) {
                 ined.value = "";
-                splatStack.push(100);
-                my_img.src = "{% static 'myapp/img/level_decoding_image1.jpg'%}";
-                setTimeout(() => {
-                    alert("YOU WIN!!!!"); /********输入flag0.8s后过关**********/
-                }, 800); 
+                ined.setAttribute('disabled', 'disabled');
+                my_text22.removeAttribute('disabled');
+                splatStack.push(50);
+                my_img.style.display = "none";
+                let str = '';
+                let n = 10 + Math.round(Math.random() * 20);
+                for (let i = 0; i < n; i++) {
+                    str += "Hello SCNU SoCoding."
+                }
+                my_text.innerHTML = str;
             }
         }
     </script>
