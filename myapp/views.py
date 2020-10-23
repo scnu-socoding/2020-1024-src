@@ -8,7 +8,7 @@ import hashlib
 
 
 def index(request):
-    return render(request, 'login.html')
+    return render(request, 'level7.html')
 
 
 def login(request):

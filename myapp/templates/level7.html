@@ -44,12 +44,14 @@
             style="font-size:20px;font-weight:bold;text-align:center"></textarea>
         <br>
         <br>
-         <form action="{% url 'compare_flag' %}" method="post" id="post_form">
-        {% csrf_token %}
-        <!-- Today is a nice day! -->
-        <input type="text" name="04ad5938eaf0efb6">
-        <input type="submit" value="Submit" />
-    </form>
+        <button id="bu" onclick="buOnClick()" style="width: 100px; height: 40px; border: 1px solid red;"
+            disabled="">下一关</button>
+        <form action="{% url 'compare_flag' %}" method="post" id="post_form">
+            {% csrf_token %}
+            <!-- Today is a nice day! -->
+            <input type="text" name="04ad5938eaf0efb6">
+            <input type="submit" value="Submit" />
+        </form>
 
     </div>
     <div style="position:fixed; bottom:0px; right:20px">
