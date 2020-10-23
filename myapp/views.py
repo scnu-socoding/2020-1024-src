@@ -107,14 +107,19 @@ def play(request):
         if user.rank > 7 and code == '2':
             messages.success(request, '哦吼！恭喜你发现了不得了的β时间线，这一切都是命运石之门的选择~！')
 
+        if user.rank > 7 and code == '1024':
+            user.specialflag = timezone.now() # 通过彩蛋关时间
+            user.timesubtract_suprise = (
+                    user.firstflag - user.specialflag).total_seconds()
+            user.rank = 9
+            user.save()
+            return render(request, 'win.html')
+
         if user.rank > 7:
             url = '404.html' # 彩蛋关
         else:
             url = 'level' + str(user.rank) + '.html'
-            return render(request, url)
-
-        if user.rank > 7 and code == '1024':
-            return render(request, 'win.html')
+        return render(request, url)
 
     else:
         return redirect(reverse('login')+"?code=-3")
@@ -160,15 +165,13 @@ def compare_flag(request):
             user.save()
             return redirect(reverse('win'))
         elif flag == '10241024':
-            response = redirect(reverse('play')+"?code=2")
-            # 写入cookie
-            response.set_signed_cookie("I_AM_A_KEY", "code=1024")
-            user.specialflag = timezone.now()
-            user.timesubtract_suprise = (
-                user.firstflag - user.specialflag).total_seconds()
+            request.session['I_AM_A_KEY'] = 'code=1024'
+            # user.specialflag = timezone.now()
+            # user.timesubtract_suprise = (
+            #     user.firstflag - user.specialflag).total_seconds()
             user.rank = 8
             user.save()
-            return response
+            return redirect(reverse('play')+"?code=2")
         else:
             return redirect(reverse('play')+"?code=-1")
     return redirect(reverse('play'))
