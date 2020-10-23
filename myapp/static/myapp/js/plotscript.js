@@ -224,7 +224,7 @@ window.onload = function () {
     col = color[0];
     cfa.addEventListener("mousemove", mouseMove);
     cfa.addEventListener("mousewheel", mouseWheel);
-    window.setInterval(refresh22, 1000 / fpss);
+    interval22 = window.setInterval(refresh22, 1000 / fpss);
     /*
     window.setInterval(function () {
         pa = [0, 0];
@@ -582,12 +582,7 @@ function splot(exs) {
 }
 
 function showLaTex(str) {
-    if (img.alt != str) {
-        img.alt = str;
-        let s = str.replace(/\\;\\;/g, "\\\\")
-            .replace(/\\textasciicircum{}/g, "^");
-        img.src = "https://www.zhihu.com/equation?tex=" + encodeURIComponent(s);
-    }
+
 }
 
 function changefm(str) {
@@ -616,8 +611,10 @@ function refresh(isD = false) {
 }
 
 function checkwin() {
-    if (ballcolor == "rgb(" + 255 + "," + 0 + "," + 255 + ")") {
-        alert("YOU WIN!!!")
+    if (ballcolor == "rgb(255,0,255)") {
+        window.clearInterval(interval22);
+        window.clearInterval(interval);
+        alert("YOU WIN!!!");
     }
 }
 
@@ -727,7 +724,7 @@ function refresh22() {
     ctx3.fill();
 }
 
-document.onkeydown = function (e) {
+window.onkeydown = function (e) {
     switch (e.keyCode) {
         case 38:
             ipw = true;
@@ -744,7 +741,7 @@ document.onkeydown = function (e) {
     }
 }
 
-document.onkeyup = function (e) {
+windows.onkeyup = function (e) {
     switch (e.keyCode) {
         case 32:
             if (interval == undefined) {
