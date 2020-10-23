@@ -1,3 +1,4 @@
+ {% load static %}
 <!doctype html>
 <html>
 
@@ -33,7 +34,6 @@
 
 <body ondragstart="return false" oncontextmenu="return false" ondragstart="return false" onselect="return false"
     onselect="document.selection.empty()" onpaste="return false" oncopy="return false" oncut="return false">
-    {% load static %}
     <div id="father">
         <canvas id="gc"></canvas>
         <canvas id="gc2"></canvas>
@@ -43,13 +43,14 @@
         <textarea id="ed" oninput="inChange()" rows="1" cols="50"
             style="font-size:20px;font-weight:bold;text-align:center"></textarea>
         <br>
-        <br>
-         <form action="{% url 'compare_flag' %}" method="post" id="post_form">
-        {% csrf_token %}
-        <!-- Today is a nice day! -->
-        <input type="text" name="04ad5938eaf0efb6">
-        <input type="submit" value="Submit" />
-    </form>
+          <button id="bu" onclick="buOnClick()" style="width: 100px; height: 40px; border: 1px solid red;"
+            disabled="">下一关</button>
+        <form action="{% url 'compare_flag' %}" method="post" id="post_form">
+            {% csrf_token %}
+            <!-- Today is a nice day! -->
+            <input type="text" name="04ad5938eaf0efb6">
+            <input type="submit" value="Submit" />
+        </form>
 
     </div>
     <div style="position:fixed; bottom:0px; right:20px">
@@ -60,6 +61,6 @@
 </body>
 
 <script src="{% static 'myapp/js/math.min.js'%}"></script>
-<script src="{% static 'myapp/js/level7.js' %}"></script>
+<script src="{% static 'myapp/js/level77.js' %}"></script>
 
 </html>
