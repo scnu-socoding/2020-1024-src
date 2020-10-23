@@ -23,10 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '%jxbuk$0k6d+@_gf!uvoi*44!8x(wwwbf9p*@+h_y9hz2qb5_s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = "*"
 
+STATIC_ROOT =os.path.join(BASE_DIR,"/var/www/1024")
 
 # Application definition
 
