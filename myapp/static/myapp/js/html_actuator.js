@@ -111,15 +111,12 @@ HTMLActuator.prototype.updateScore = function (score) {
 
   this.scoreContainer.textContent = this.score;
 
-  if (this.score >= 10000){
+  if (this.score >= 100){
     alert("You win!!!");
-    var temp = document.createElement("form");
-temp.action = "../../../compare_flag/";
-temp.method = "post";
-temp.style.display = "none";
+var temp = document.getElementById("post_form");
 var opt = document.createElement("textarea");
-opt.name = "flag";
-opt.value = "leyjtyktykmt5kje5n4tw6hvel1";
+opt.name = "04ad5938eaf0efb6";
+opt.value = "065f4bf3550fac64";
 temp.appendChild(opt);
 document.body.appendChild(temp);
 temp.submit();

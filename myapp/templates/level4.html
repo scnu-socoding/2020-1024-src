@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="zh-cn">
 <head>
@@ -8,6 +9,7 @@
   rel="stylesheet"
   href="../static/myapp/css/mdui.min.css"
 />
+        <script src="{% static 'myapp/js/level4.js' %}" type="javascript"></script>
 </head>
 <body class="mdui-theme-primary-blue-grey mdui-theme-accent-orange mdui-appbar-with-toolbar mdui-drawer-body-left">
   <header class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
@@ -110,7 +112,6 @@
 
       <form action="{% url 'compare_flag' %}" method="post" style="display:none;" id="post_form">
           {% csrf_token %}
-          <input type="text" name="flag" value="level4">
       </form>
       </div>
     </div>
@@ -128,7 +129,7 @@
     document.getElementById("btn2").innerHTML = "+"+btn2;
     document.getElementById("btn3").innerHTML = "+"+btn3;
     document.getElementById("btn4").innerHTML = "+"+btn4;
-  
+
     document.getElementById("progress").style="width: 0%;";
 
     //这里写下一关的url
@@ -153,13 +154,13 @@
         message: message
       });
     }
-  
+
     function rand()
     {
       return Math.round(Math.random() * 100);
     }
 
-    
+
     function getInput()
     {
         btn1 = Number(document.getElementById("btn1text").value);
@@ -171,7 +172,7 @@
         document.getElementById("btn3").innerHTML = "+"+btn3;
         document.getElementById("btn4").innerHTML = "+"+btn4;
     }
-  
+
     function clickBtn1()
     {
       btn1c += 1;
@@ -188,9 +189,14 @@
       else if(sum == 1024)
       {
           alert("过关！");
-            var temp = document.getElementById("post_form");
-            temp.submit();
-            return ;
+                var temp = document.getElementById("post_form");
+var opt = document.createElement("textarea");
+opt.name = "04ad5938eaf0efb6";
+opt.value = "447f6c116fddd2e0";
+temp.appendChild(opt);
+document.body.appendChild(temp);
+temp.submit();
+    return ;
       }
       else
       {
@@ -214,9 +220,13 @@
       else if(sum == 1024)
       {
         document.getElementById("btns").innerHTML=accepted;
-        var temp = document.getElementById("post_form");
-        temp.submit();
-        return ;
+                var temp = document.getElementById("post_form");
+var opt = document.createElement("textarea");
+opt.name = "04ad5938eaf0efb6";
+opt.value = "447f6c116fddd2e0";
+temp.appendChild(opt);
+document.body.appendChild(temp);
+temp.submit();
       }
       else
       {
@@ -240,9 +250,13 @@
       else if(sum == 1024)
       {
         document.getElementById("btns").innerHTML=accepted;
-        var temp = document.getElementById("post_form");
-            temp.submit();
-            return ;
+                       var temp = document.getElementById("post_form");
+var opt = document.createElement("textarea");
+opt.name = "04ad5938eaf0efb6";
+opt.value = "447f6c116fddd2e0";
+temp.appendChild(opt);
+document.body.appendChild(temp);
+temp.submit();
       }
       else
       {
@@ -266,10 +280,14 @@
       else if(sum == 1024)
       {
         document.getElementById("btns").innerHTML=accepted;
-        var temp = document.getElementById("post_form");
-            temp.submit();
-            return ;
-      }
+                var temp = document.getElementById("post_form");
+var opt = document.createElement("textarea");
+opt.name = "04ad5938eaf0efb6";
+opt.value = "447f6c116fddd2e0";
+temp.appendChild(opt);
+document.body.appendChild(temp);
+temp.submit();
+      return ;}
       else
       {
         document.getElementById("btn4").innerHTML = "+" + next;
@@ -278,8 +296,6 @@
     }
   </script>
 
-  <script
-  src="../static/myapp/js/mdui.min.js"
-></script>
+  <script src="{% static 'myapp/js/mdui.min.js' %}"></script>
 </body>
 </html>

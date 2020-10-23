@@ -95,6 +95,8 @@ def play(request):
         code = request.GET.get('code', None)
         userid = request.session['userid']
         user = STUDB.objects.filter(userid=userid).last()
+
+
         if user.rank < 6 and code == '-1':
             messages.error(request, "哎呀，错了orz")
 
@@ -128,15 +130,15 @@ def play(request):
 def compare_flag(request):
     correct_flag = [
         '',
-        'level1',
-        'level2',
-        'level3',
-        'level4',
-        'level5',
-        'level6',
-        'level7',   # 普通关最后一关
+        '065f4bf3550fac64',
+        'fc88fc38539099b2',
+        '588c77305b6997e6',
+        '447f6c116fddd2e0',
+        '45f609eedf0d948f',
+        '61f76181c5d100b3',
+        '1db8d352466b5e5b',   # 普通关最后一关
     ]
-    flag = request.POST.get('flag', None)
+    flag = request.POST.get('04ad5938eaf0efb6', None)
     userid = request.session['userid']
     user = STUDB.objects.filter(userid=userid).last()
     if user.rank < 7:
@@ -158,7 +160,7 @@ def compare_flag(request):
     #     else:
     #         return redirect(reverse('play')+"?code=-1")
     elif user.rank == 7:
-        if flag == 'final':
+        if flag == '1db8d352466b5e5b':
             user.superflag = timezone.now()
             user.timesubtract_last = (
                 user.superflag-user.firstflag).total_seconds()

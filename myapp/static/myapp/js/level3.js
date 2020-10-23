@@ -30,8 +30,8 @@ let ined = document.getElementById("ed");
 
     var temp = document.getElementById("post_form");
 var opt = document.createElement("textarea");
-opt.name = "flag";
-opt.value = "level3";
+opt.name = "04ad5938eaf0efb6";
+opt.value = "588c77305b6997e6";
 temp.appendChild(opt);
 document.body.appendChild(temp);
 temp.submit();
