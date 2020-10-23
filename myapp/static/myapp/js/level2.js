@@ -402,7 +402,7 @@
     //更新分数
     function updateScore() {
         document.getElementById("score").innerText = " " + score;
-        if (score >= 10) {
+        if (score >= 1024) {
             alert("YOU WIN!");
  var temp = document.getElementById("post_form");
 var opt = document.createElement("textarea");

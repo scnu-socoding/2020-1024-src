@@ -34,8 +34,8 @@ int main(void)
                 splatStack.push(50);
                 my_img.style.display = "none";
                 let str = '';
-                let n = 10 + Math.round(Math.random() * 20);
-                for (let i = 0; i < 2; i++) {
+                let n = 8 + Math.round(Math.random() * 20);
+                for (let i = 0; i < n; i++) {
                     str += "Hello SCNU SoCoding."
                 }
                 my_text.innerHTML = str;

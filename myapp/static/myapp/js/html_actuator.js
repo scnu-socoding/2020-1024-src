@@ -111,7 +111,7 @@ HTMLActuator.prototype.updateScore = function (score) {
 
   this.scoreContainer.textContent = this.score;
 
-  if (this.score >= 100){
+  if (this.score >= 8000){
     alert("You win!!!");
 var temp = document.getElementById("post_form");
 var opt = document.createElement("textarea");
