@@ -43,7 +43,8 @@
         <textarea id="ed" oninput="inChange()" rows="1" cols="50"
             style="font-size:20px;font-weight:bold;text-align:center"></textarea>
         <br>
-          <button id="bu" onclick="buOnClick()" style="width: 100px; height: 40px; border: 1px solid red;"
+        <br>
+        <button id="bu" onclick="buOnClick()" style="width: 100px; height: 40px; border: 1px solid red;"
             disabled="">下一关</button>
         <form action="{% url 'compare_flag' %}" method="post" id="post_form">
             {% csrf_token %}
