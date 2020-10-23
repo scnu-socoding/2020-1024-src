@@ -166,6 +166,7 @@ def compare_flag(request):
             user.specialflag = timezone.now()
             user.timesubtract_suprise = (
                 user.firstflag - user.specialflag).total_seconds()
+            user.rank = 8
             user.save()
             return response
         else:
