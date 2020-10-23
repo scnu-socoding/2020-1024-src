@@ -19,8 +19,6 @@ def login(request):
         messages.error(request, "不要没填完就登录啊喂！")
     if code == '-1':
         messages.error(request, "啊哦~登录失败了←_←")
-    if code == '1':
-        messages.success(request, "注 册 成 功")
     return render(request, 'login.html')
 
 
@@ -97,14 +95,8 @@ def play(request):
         user = STUDB.objects.filter(userid=userid).last()
 
 
-        if user.rank < 6 and code == '-1':
+        if code == '-1':
             messages.error(request, "哎呀，错了orz")
-
-        if user.rank > 6 and code == '-1':
-            messages.error(request, "终局之战总是很坎坷的，请再尝试其他方法吧_(:з」∠)_")
-
-        if code == '1':
-            messages.success(request, '登录成功(｡･ω･｡)ﾉ♡')
 
         if user.rank > 7 and code == '2':
             messages.success(request, '哦吼！恭喜你发现了不得了的β时间线，这一切都是命运石之门的选择~！')
