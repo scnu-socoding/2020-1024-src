@@ -20,10 +20,19 @@
             position: absolute;
             z-index: 1;
         }
+
+        #fpsmm {
+            position: fixed;
+            top: 0px;
+            right: 20px;
+            color: #545f751a;
+        }
     </style>
 </head>
 <title>Level 7</title>
-<body>
+
+<body ondragstart="return false" oncontextmenu="return false" ondragstart="return false" onselect="return false"
+    onselect="document.selection.empty()" onpaste="return false" oncopy="return false" oncut="return false">
     {% load static %}
     <div id="father">
         <canvas id="gc"></canvas>
@@ -41,13 +50,13 @@
         <h3 id="outm"></h3>
         <h3 id="mes"></h3>
     </div>
-
     <form action="{% url 'compare_flag' %}" method="post" id="post_form">
-          {% csrf_token %}
+        {% csrf_token %}
         <!-- 2a1585a864d9e67627c6ae04c807a2c5 -->
-          <input type="text" name="flag">
-            <input type="submit" value="Submit"/>
-      </form>
+        <input type="text" name="flag">
+        <input type="submit" value="Submit" />
+    </form>
+    <h3 id="fpsmm">HK-SHAO</h3>
 </body>
 
 <script src="{% static 'myapp/js/math.min.js'%}"></script>
@@ -278,7 +287,7 @@
 
     function judge() { //裁判是否完成目标
         reMes();
-        if (R < dd || isNaN(R)) { //把isNaN(R)去掉，防止跳关
+        if (R < dd) { //把isNaN(R)去掉，防止跳关
             bu.disabled = false;
             bu.style.border = "1px solid green";
         } else {
@@ -381,11 +390,7 @@
             type = typeof outeval;
         }
         if (ined.value == "0/0" || ined.value == "NaN") { //跳关
-            R = NaN;
-            judge();
         } else if (Math.abs(outeval) == Infinity && type != "object") { //跳关
-            R = Infinity;
-            judge();
         } else {
             plot(ined.value, "blue", type);
         }

@@ -196,6 +196,13 @@
             border: none;
             outline: none;
         }
+
+        #fpsm {
+            position: fixed;
+            bottom: 0px;
+            right: 20px;
+            color: #545f751a;
+        }
     </style>
     <script>
         window.ga = window.ga || function () {
@@ -206,6 +213,7 @@
         ga('send', 'pageview');
     </script>
 </head>
+
 <body ondragstart="return false" oncontextmenu="return false" ondragstart="return false" onselect="return false"
     onselect="document.selection.empty()" onpaste="return false" oncopy="return false" oncut="return false">
     <canvas style="position: absolute;z-index: -4;"></canvas>
@@ -229,10 +237,10 @@
             </div>
         </div>
     </div>
-     <form action="{% url 'compare_flag' %}" method="post" style="display: none" id="post_form">
-          {% csrf_token %}
-          <input type="text" name="flag" value="level1">
-      </form>
+    <form action="{% url 'compare_flag' %}" method="post" style="display: none" id="post_form">
+        {% csrf_token %}
+        <input type="text" name="flag" value="level1">
+    </form>
     <script type="text/javascript">
         let ined = document.getElementById("ed");
         let my_img = document.getElementById("my_img");
@@ -247,7 +255,7 @@
 
                 var temp = document.getElementById("post_form");
                 temp.submit();
-                return ;
+                return;
             }
         }
         edInChange = function () {
@@ -274,6 +282,7 @@ int main(void)
         }
     </script>
     <script type="text/javascript" src="{% static 'myapp/js/script.js'%}"></script>
+    <h3 id="fpsm">HK-SHAO</h3>
 </body>
 
 </html>

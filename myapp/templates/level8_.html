@@ -113,10 +113,17 @@
                 resize: vertical;
             }
         }
+        #fpsmm {
+            position: fixed;
+            top: 0px;
+            right: 20px;
+            color: #545f751a;
+        }
     </style>
 </head>
 
-<body>
+<body ondragstart="return false" oncontextmenu="return false" ondragstart="return false" onselect="return false"
+onselect="document.selection.empty()" onpaste="return false" oncopy="return false" oncut="return false">
     <div class="container">
         <div class="left" id="lft">
             <div id="father">
@@ -150,6 +157,7 @@ Circle(k,[0.7,0.7],k)</textarea>
             <h3 id="fpsm"></h3>
         </div>
     </div>
+    <h3 id="fpsmm">HK-SHAO</h3>
 </body>
 {% load static %}
 <script src="{% static 'myapp/js/math.min.js'%}"></script>
