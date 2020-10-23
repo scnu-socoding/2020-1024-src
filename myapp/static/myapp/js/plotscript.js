@@ -724,7 +724,7 @@ function refresh22() {
     ctx3.fill();
 }
 
-window.onkeydown = function (e) {
+document.onkeydown = function (e) {
     switch (e.keyCode) {
         case 38:
             ipw = true;
@@ -741,7 +741,7 @@ window.onkeydown = function (e) {
     }
 }
 
-windows.onkeyup = function (e) {
+document.onkeyup = function (e) {
     switch (e.keyCode) {
         case 32:
             if (interval == undefined) {
