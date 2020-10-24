@@ -101,7 +101,10 @@ def play(request):
         if user.rank > 7 and code == '2':
             messages.success(request, '哦吼！恭喜你发现了不得了的β时间线，这一切都是命运石之门的选择~！')
 
-        if user.rank > 7 and code == '1024':
+        if user.rank == 9 and code == '1024':
+            return render(request, 'win.html')
+
+        if user.rank == 8 and code == '1024':
             user.specialflag = timezone.now() # 通过彩蛋关时间
             user.timesubtract_suprise = (
                     user.firstflag - user.specialflag).total_seconds()
